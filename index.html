@@ -1,0 +1,3940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Support - Learn Web Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e5e5e5;
+            background-color: #1a1a1a;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: #111;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 300;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00d4ff;
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 300;
+            color: #fff;
+            margin: 40px 0 20px 0;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #fff;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            font-size: 18px;
+            font-weight: 400;
+            color: #00d4ff;
+            margin: 25px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #ccc;
+            max-width: 800px;
+        }
+
+        /* Lesson Grid */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .lesson-card {
+            background: #222;
+            border: 1px solid #333;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lesson-card:hover {
+            border-color: #00d4ff;
+            background: #252525;
+        }
+
+        .lesson-number {
+            color: #00d4ff;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .lesson-title {
+            font-size: 20px;
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .lesson-description {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #111;
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #e5e5e5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+
+        .command {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            color: #00d4ff;
+            padding: 12px 16px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: #1a2332;
+            border: 1px solid #2d4a6b;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .info-box h4 {
+            color: #00d4ff;
+            margin: 0 0 10px 0;
+        }
+
+        .info-box p {
+            color: #b8d4e8;
+            margin: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+            color: #ccc;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: #222;
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .progress-bar {
+            background: #333;
+            height: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #00d4ff;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .lesson-status {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 5px 5px 5px 0;
+            background: #333;
+            color: #999;
+            font-size: 12px;
+            border: 1px solid #444;
+        }
+
+        .lesson-status.completed {
+            background: #00d4ff;
+            color: #000;
+            border-color: #00d4ff;
+        }
+
+        .lesson-status.current {
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            color: #00d4ff;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            color: #fff;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+            
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #222;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #333;
+        }
+
+        th {
+            background: #111;
+            color: #00d4ff;
+            font-weight: 400;
+        }
+
+        td {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">Web Support</a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('lesson1')">Command Line</a></li>
+                <li><a href="#" onclick="showPage('lesson2')">Git</a></li>
+                <li><a href="#" onclick="showPage('lesson3')">HTML</a></li>
+                <li><a href="#" onclick="showPage('lesson4')">CSS</a></li>
+                <li><a href="#" onclick="showPage('lesson5')">JavaScript</a></li>
+                <li><a href="#" onclick="showPage('lesson6')">Images</a></li>
+                <li><a href="#" onclick="showPage('lesson7')">Hosting</a></li>
+                <li><a href="#" onclick="showPage('lesson8')">Domain</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <h1>Learn Web Development</h1>
+            <p>Master the essential skills to build and deploy professional websites. This course teaches you everything from command line basics to hosting with a custom domain, all while building a portfolio of digital collages.</p>
+
+            <div class="progress-container">
+                <h3>Your Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div id="lesson-status-list">
+                    <span class="lesson-status current" data-lesson="1">01. Command Line</span>
+                    <span class="lesson-status" data-lesson="2">02. Git & GitHub</span>
+                    <span class="lesson-status" data-lesson="3">03. HTML</span>
+                    <span class="lesson-status" data-lesson="4">04. CSS</span>
+                    <span class="lesson-status" data-lesson="5">05. JavaScript</span>
+                    <span class="lesson-status" data-lesson="6">06. Images</span>
+                    <span class="lesson-status" data-lesson="7">07. Hosting</span>
+                    <span class="lesson-status" data-lesson="8">08. Domain</span>
+                </div>
+            </div>
+
+            <h2>Course Overview</h2>
+            <p>You'll build a complete portfolio website showcasing digital collages while learning the fundamental technologies that power the modern web. Each lesson builds upon the previous, culminating in a live website with professional hosting and a custom domain.</p>
+
+            <div class="lessons-grid">
+                <div class="lesson-card" onclick="showPage('lesson1')">
+                    <div class="lesson-number">01</div>
+                    <div class="lesson-title">Command Line Fundamentals</div>
+                    <div class="lesson-description">Learn to navigate and control your computer through the terminal. Essential for all development work.</div>
+                </div>
+
+                <div class="lesson-card" onclick="showPage('lesson2')">
+                    <div class="lesson-number">02</div>
+                    <div class="lesson-title">Git & GitHub</div>
+                    <div class="lesson-description">Master version control to track changes, collaborate, and deploy your code safely.</div>
+                </div>
+
+                <div class="lesson-card" onclick="showPage('lesson3')">
+                    <div class="lesson-number">03</div>
+                    <div class="lesson-title">HTML Structure</div>
+                    <div class="lesson-description">Build semantic, accessible web pages with modern HTML5 elements and best practices.</div>
+                </div>
+
+                <div class="lesson-card" onclick="showPage('lesson4')">
+                    <div class="lesson-number">04</div>
+                    <div class="lesson-title">CSS Styling</div>
+                    <div class="lesson-description">Create beautiful, responsive layouts using modern CSS techniques including Grid and Flexbox.</div>
+                </div>
+
+                <div class="lesson-card" onclick="showPage('lesson5')">
+                    <div class="lesson-number">05</div>
+                    <div class="lesson-title">JavaScript Interactivity</div>
+                    <div class="lesson-description">Add dynamic behavior and user interactions to bring your portfolio to life.</div>
+                </div>
+
+                <div class="lesson-card" onclick="showPage('lesson6')">
+                    <div class="lesson-number">06</div>
+                    <div class="lesson-title">Image Optimization</div>
+                    <div class="lesson-description">Host and optimize your images professionally with Cloudinary's powerful features.</div>
+                </div>
+
+                <div class="lesson-card" onclick="showPage('lesson7')">
+                    <div class="lesson-number">07</div>
+                    <div class="lesson-title">Netlify Hosting</div>
+                    <div class="lesson-description">Deploy your portfolio to the web with automatic builds and global content delivery.</div>
+                </div>
+
+                <div class="lesson-card" onclick="showPage('lesson8')">
+                    <div class="lesson-number">08</div>
+                    <div class="lesson-title">Custom Domain</div>
+                    <div class="lesson-description">Purchase and connect a professional domain name to complete your online presence.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 1: Command Line -->
+        <div id="lesson1" class="page">
+            <a class="back-btn" onclick="showPage('home')">← Back to Overview</a>
+            <h1>Command Line Fundamentals</h1>
+            <p>The command line interface (CLI) is a text-based way to interact with your computer. While it might seem intimidating at first, mastering the command line will make you significantly more efficient as a developer and give you access to powerful tools that don't have graphical interfaces.</p>
+
+            <h2>Why Learn Command Line?</h2>
+            <p>Modern web development relies heavily on command line tools. Package managers, build tools, version control systems, and deployment scripts all operate through the terminal. Learning the command line is essential for:</p>
+            <ul>
+                <li>Installing and managing development tools</li>
+                <li>Navigating file systems efficiently</li>
+                <li>Using Git for version control</li>
+                <li>Running build processes and scripts</li>
+                <li>Deploying applications to servers</li>
+            </ul>
+
+            <h2>Understanding Your Terminal</h2>
+            <p>The terminal is an application that provides access to the command line. On macOS, it's called "Terminal." On Windows, you can use "Command Prompt," "PowerShell," or install "Git Bash" for a Unix-like experience.</p>
+
+            <h3>The Command Prompt</h3>
+            <p>When you open a terminal, you'll see a prompt that typically shows your username, computer name, and current directory:</p>
+            <div class="command">username@computer:~/current-directory $</div>
+
+            <h2>Essential Navigation Commands</h2>
+
+            <h4>pwd - Print Working Directory</h4>
+            <p>Shows your current location in the file system:</p>
+            <div class="command">pwd</div>
+            <div class="code-block">/Users/yourname/Documents</div>
+
+            <h4>ls - List Directory Contents</h4>
+            <p>Displays files and folders in the current directory:</p>
+            <div class="command">ls</div>
+            <div class="code-block">Desktop    Documents    Downloads    Pictures    Music</div>
+
+            <p>Use flags to modify the output:</p>
+            <div class="command">ls -la</div>
+            <div class="code-block">drwxr-xr-x   5 user  staff   160 Oct 15 09:30 Desktop
+drwxr-xr-x   8 user  staff   256 Oct 15 10:15 Documents
+drwxr-xr-x   3 user  staff    96 Oct 15 08:45 Downloads</div>
+
+            <div class="info-box">
+                <h4>Command Flags Explained</h4>
+                <p><strong>-l</strong>: Long format (shows permissions, size, date)<br>
+                <strong>-a</strong>: Show hidden files (starting with .)<br>
+                <strong>-h</strong>: Human readable file sizes</p>
+            </div>
+
+            <h4>cd - Change Directory</h4>
+            <p>Navigate between folders:</p>
+            <div class="command">cd Documents</div>
+            <div class="command">cd ..</div>
+            <p><strong>..</strong> means "parent directory" (go up one level)</p>
+            <div class="command">cd ~</div>
+            <p><strong>~</strong> means "home directory" (your user folder)</p>
+
+            <h2>File and Folder Management</h2>
+
+            <h4>mkdir - Make Directory</h4>
+            <p>Create new folders:</p>
+            <div class="command">mkdir my-new-folder</div>
+            <div class="command">mkdir -p projects/web-development/portfolio</div>
+            <p>The <strong>-p</strong> flag creates parent directories if they don't exist.</p>
+
+            <h4>touch - Create Files</h4>
+            <p>Create empty files:</p>
+            <div class="command">touch index.html</div>
+            <div class="command">touch style.css script.js</div>
+
+            <h4>cp - Copy Files and Folders</h4>
+            <div class="command">cp file.txt backup.txt</div>
+            <div class="command">cp -r folder-name folder-copy</div>
+            <p>The <strong>-r</strong> flag copies directories recursively.</p>
+
+            <h4>mv - Move and Rename</h4>
+            <div class="command">mv old-name.txt new-name.txt</div>
+            <div class="command">mv file.txt different-folder/</div>
+
+            <h4>rm - Remove Files and Folders</h4>
+            <div class="command">rm unwanted-file.txt</div>
+            <div class="command">rm -rf unwanted-folder</div>
+            <p><strong>Warning:</strong> rm permanently deletes files. Use with caution!</p>
+
+            <h2>Project Setup Exercise</h2>
+            <p>Let's create the folder structure for your collage portfolio project:</p>
+
+            <div class="code-block">
+# Navigate to your desired location
+cd ~/Documents
+
+# Create the main project folder
+mkdir collage-portfolio
+
+# Enter the project folder
+cd collage-portfolio
+
+# Create the subfolder structure
+mkdir css
+mkdir js
+mkdir images
+mkdir images/gallery
+mkdir images/thumbnails
+
+# Create the main files
+touch index.html
+touch css/style.css
+touch css/reset.css
+touch js/script.js
+touch README.md
+
+# Verify the structure
+ls -la
+</div>
+
+            <h2>Useful Tips and Shortcuts</h2>
+
+            <table>
+                <tr>
+                    <th>Shortcut</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Tab</td>
+                    <td>Auto-complete file and folder names</td>
+                </tr>
+                <tr>
+                    <td>↑ (Up Arrow)</td>
+                    <td>Recall previous commands</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + C</td>
+                    <td>Cancel current command</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + L</td>
+                    <td>Clear terminal screen</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + A</td>
+                    <td>Jump to beginning of line</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + E</td>
+                    <td>Jump to end of line</td>
+                </tr>
+            </table>
+
+            <h2>Viewing File Contents</h2>
+
+            <h4>cat - Display File Contents</h4>
+            <div class="command">cat index.html</div>
+
+            <h4>less - View Large Files</h4>
+            <div class="command">less large-file.txt</div>
+            <p>Press 'q' to quit, space to scroll down, 'b' to scroll up.</p>
+
+            <h4>head and tail - View Beginning or End</h4>
+            <div class="command">head -10 file.txt</div>
+            <div class="command">tail -20 file.txt</div>
+
+            <h2>Getting Help</h2>
+            <p>Most commands have built-in help:</p>
+            <div class="command">ls --help</div>
+            <div class="command">man ls</div>
+            <p>The <strong>man</strong> command shows the manual page for any command.</p>
+
+            <div class="info-box">
+                <h4>Practice Makes Perfect</h4>
+                <p>The command line becomes natural with practice. Try to use it for daily file operations instead of the graphical file manager. Start with simple tasks and gradually incorporate more commands into your workflow.</p>
+            </div>
+
+            <h2>Next Steps</h2>
+            <p>Now that you're comfortable with basic command line operations, you're ready to learn Git for version control. Understanding the command line is essential for Git, as many Git operations are performed through terminal commands.</p>
+        </div>
+
+        <!-- Lesson 2: Git & GitHub -->
+        <div id="lesson2" class="page">
+            <a class="back-btn" onclick="showPage('home')">← Back to Overview</a>
+            <h1>Git & GitHub</h1>
+            <p>Git is a distributed version control system that tracks changes in your files and enables collaboration with other developers. GitHub is a cloud-based platform that hosts Git repositories and provides additional collaboration features.</p>
+
+            <h2>What is Version Control?</h2>
+            <p>Version control is like having an unlimited undo button for your entire project. It tracks every change you make, allows you to revert to previous versions, and enables multiple people to work on the same project without conflicts.</p>
+
+            <h3>Why Git is Essential</h3>
+            <ul>
+                <li><strong>Track Changes:</strong> See exactly what changed, when, and who changed it</li>
+                <li><strong>Backup:</strong> Your code is safely stored and retrievable</li>
+                <li><strong>Branching:</strong> Work on features without breaking the main code</li>
+                <li><strong>Collaboration:</strong> Multiple developers can work simultaneously</li>
+                <li><strong>Deployment:</strong> Many hosting services integrate directly with Git</li>
+            </ul>
+
+            <h2>Git Fundamentals</h2>
+
+            <h3>Repository (Repo)</h3>
+            <p>A repository is a project folder that Git is tracking. It contains all your files plus a hidden .git folder that stores the version history.</p>
+
+            <h3>Working Directory, Staging Area, and Repository</h3>
+            <p>Git has three main areas:</p>
+            <ul>
+                <li><strong>Working Directory:</strong> Your actual files that you edit</li>
+                <li><strong>Staging Area:</strong> Files prepared for the next commit</li>
+                <li><strong>Repository:</strong> Committed snapshots of your project</li>
+            </ul>
+
+            <h2>Installing Git</h2>
+            <p>Download Git from <strong>git-scm.com</strong> and follow the installation instructions for your operating system.</p>
+
+            <h3>First-Time Setup</h3>
+            <p>Configure Git with your name and email:</p>
+            <div class="code-block">
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+# Check your configuration
+git config --list
+</div>
+
+            <h2>Basic Git Commands</h2>
+
+            <h4>git init - Initialize Repository</h4>
+            <p>Turn any folder into a Git repository:</p>
+            <div class="code-block">
+cd collage-portfolio
+git init
+</div>
+
+            <h4>git status - Check Repository Status</h4>
+            <p>See which files have changed and what's staged:</p>
+            <div class="command">git status</div>
+            <div class="code-block">
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        css/
+        index.html
+        js/
+
+nothing added to commit but untracked files present
+</div>
+
+            <h4>git add - Stage Files</h4>
+            <p>Add files to the staging area:</p>
+            <div class="command">git add index.html</div>
+            <div class="command">git add css/style.css</div>
+            <div class="command">git add .</div>
+            <p>The dot (.) adds all changed files in the current directory.</p>
+
+            <h4>git commit - Save Changes</h4>
+            <p>Create a snapshot of your staged changes:</p>
+            <div class="command">git commit -m "Initial project setup with basic file structure"</div>
+
+            <div class="info-box">
+                <h4>Writing Good Commit Messages</h4>
+                <p>Use clear, descriptive messages in present tense:<br>
+                ✅ "Add responsive navigation menu"<br>
+                ✅ "Fix image loading bug in gallery"<br>
+                ❌ "Updated stuff"<br>
+                ❌ "Fixed things"</p>
+            </div>
+
+            <h4>git log - View Commit History</h4>
+            <div class="command">git log</div>
+            <div class="command">git log --oneline</div>
+            <div class="code-block">
+commit 2f8d1a3b... (HEAD -> main)
+Author: Your Name <your.email@example.com>
+Date:   Thu Oct 15 10:30:00 2025 -0700
+
+    Initial project setup with basic file structure
+</div>
+
+            <h2>GitHub Integration</h2>
+
+            <h3>What is GitHub?</h3>
+            <p>GitHub is a cloud platform that hosts Git repositories and adds collaboration features like issue tracking, pull requests, and project management tools.</p>
+
+            <h3>Creating a GitHub Account</h3>
+            <ol>
+                <li>Go to <strong>github.com</strong> and sign up</li>
+                <li>Choose a username that represents you professionally</li>
+                <li>Verify your email address</li>
+            </ol>
+
+            <h3>Creating a Repository on GitHub</h3>
+            <ol>
+                <li>Click the "+" icon in the top right</li>
+                <li>Select "New repository"</li>
+                <li>Name it "collage-portfolio"</li>
+                <li>Make it public (so it can be hosted for free)</li>
+                <li>Don't initialize with README (we already have files)</li>
+                <li>Click "Create repository"</li>
+            </ol>
+
+            <h3>Connecting Local Repository to GitHub</h3>
+            <div class="code-block">
+# Add GitHub as remote origin
+git remote add origin https://github.com/yourusername/collage-portfolio.git
+
+# Verify the remote was added
+git remote -v
+
+# Push your code to GitHub
+git branch -M main
+git push -u origin main
+</div>
+
+            <h2>Daily Git Workflow</h2>
+
+            <h3>Making Changes</h3>
+            <div class="code-block">
+# Check what's changed
+git status
+
+# Add specific files
+git add index.html css/style.css
+
+# Or add all changes
+git add .
+
+# Commit with a descriptive message
+git commit -m "Add hero section with background image"
+
+# Push to GitHub
+git push
+</div>
+
+            <h3>Pulling Changes</h3>
+            <p>If you're working from multiple computers or collaborating:</p>
+            <div class="command">git pull</div>
+
+            <h2>Branching</h2>
+            <p>Branches allow you to work on features without affecting the main code:</p>
+
+            <div class="code-block">
+# Create and switch to new branch
+git checkout -b feature/gallery-lightbox
+
+# Work on your feature, make commits
+git add .
+git commit -m "Add lightbox functionality to gallery"
+
+# Switch back to main branch
+git checkout main
+
+# Merge your feature
+git merge feature/gallery-lightbox
+
+# Delete the feature branch
+git branch -d feature/gallery-lightbox
+</div>
+
+            <h2>Useful Git Commands</h2>
+
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>git diff</td>
+                    <td>Show changes in working directory</td>
+                </tr>
+                <tr>
+                    <td>git diff --staged</td>
+                    <td>Show changes in staging area</td>
+                </tr>
+                <tr>
+                    <td>git reset HEAD file.txt</td>
+                    <td>Unstage a file</td>
+                </tr>
+                <tr>
+                    <td>git checkout -- file.txt</td>
+                    <td>Discard changes in working directory</td>
+                </tr>
+                <tr>
+                    <td>git branch</td>
+                    <td>List all branches</td>
+                </tr>
+                <tr>
+                    <td>git clone URL</td>
+                    <td>Download a repository from GitHub</td>
+                </tr>
+            </table>
+
+            <h2>GitHub Features</h2>
+
+            <h3>Issues</h3>
+            <p>Track bugs, feature requests, and tasks:</p>
+            <ul>
+                <li>Create issues for each feature or bug</li>
+                <li>Assign them to team members</li>
+                <li>Reference issues in commit messages: "Fix navigation bug (#12)"</li>
+            </ul>
+
+            <h3>README.md</h3>
+            <p>Create a README.md file to document your project:</p>
+            <div class="code-block">
+# Collage Portfolio
+
+A responsive web portfolio showcasing digital collage artwork.
+
+## Features
+
+- Responsive gallery layout
+- Image optimization with Cloudinary
+- Smooth animations and interactions
+- Contact form integration
+
+## Technologies Used
+
+- HTML5 & CSS3
+- JavaScript
+- Cloudinary for image hosting
+- Netlify for deployment
+
+## View Live
+
+[Visit the portfolio](https://yourname.netlify.app)
+</div>
+
+            <h3>GitHub Pages</h3>
+            <p>GitHub can host simple websites for free:</p>
+            <ol>
+                <li>Go to your repository settings</li>
+                <li>Scroll to "Pages" section</li>
+                <li>Select "Deploy from a branch"</li>
+                <li>Choose "main" branch</li>
+                <li>Your site will be available at username.github.io/repository-name</li>
+            </ol>
+
+            <div class="info-box">
+                <h4>Git Best Practices</h4>
+                <p>• Commit often with small, logical changes<br>
+                • Write clear commit messages<br>
+                • Pull before pushing to avoid conflicts<br>
+                • Use branches for new features<br>
+                • Never commit sensitive information (passwords, API keys)</p>
+            </div>
+
+            <h2>Common Git Scenarios</h2>
+
+            <h3>Undoing the Last Commit</h3>
+            <div class="command">git reset --soft HEAD~1</div>
+            <p>This undoes the commit but keeps your changes staged.</p>
+
+            <h3>Fixing a Commit Message</h3>
+            <div class="command">git commit --amend -m "Corrected commit message"</div>
+
+            <h3>Seeing What Changed</h3>
+            <div class="command">git show</div>
+            <p>Shows the last commit's changes.</p>
+
+            <h2>Project Exercise</h2>
+            <p>Practice the complete workflow:</p>
+            <div class="code-block">
+# 1. Initialize your portfolio repository
+cd collage-portfolio
+git init
+git add .
+git commit -m "Initial commit: Project structure and empty files"
+
+# 2. Create GitHub repository and connect
+git remote add origin https://github.com/yourusername/collage-portfolio.git
+git push -u origin main
+
+# 3. Make a change and commit
+echo "<h1>My Collage Portfolio</h1>" > index.html
+git add index.html
+git commit -m "Add basic HTML structure to homepage"
+git push
+
+# 4. Create a feature branch
+git checkout -b feature/basic-styling
+# Add some CSS, then:
+git add css/style.css
+git commit -m "Add basic typography and layout styles"
+git checkout main
+git merge feature/basic-styling
+git push
+</div>
+
+            <h2>Next Steps</h2>
+            <p>Now that you understand version control with Git and GitHub, you're ready to start building your HTML structure. Git will track every change you make, giving you the confidence to experiment and iterate on your design.</p>
+        </div>
+
+        <!-- Lesson 3: HTML -->
+        <div id="lesson3" class="page">
+            <a class="back-btn" onclick="showPage('home')">← Back to Overview</a>
+            <h1>HTML Structure</h1>
+            <p>HTML (HyperText Markup Language) is the foundation of all web pages. It provides structure and meaning to content, telling browsers how to organize and display information. Modern HTML5 emphasizes semantic markup that's accessible to all users and search engine friendly.</p>
+
+            <h2>What is HTML?</h2>
+            <p>HTML uses elements (tags) to mark up content. Each element has a specific purpose and meaning, from headings and paragraphs to navigation and articles. Think of HTML as the skeleton of your webpage—it provides structure that CSS will style and JavaScript will make interactive.</p>
+
+            <h3>HTML Document Structure</h3>
+            <p>Every HTML document follows the same basic structure:</p>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Your content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</div>
+
+            <h2>Essential HTML Elements</h2>
+
+            <h3>Document Declaration</h3>
+            <div class="command">&lt;!DOCTYPE html&gt;</div>
+            <p>Tells the browser this is an HTML5 document.</p>
+
+            <h3>Root Element</h3>
+            <div class="command">&lt;html lang="en"&gt;</div>
+            <p>Contains all content. The lang attribute helps screen readers and translation tools.</p>
+
+            <h3>Head Section</h3>
+            <p>Contains metadata about the document:</p>
+            <div class="code-block">
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="description" content="Digital collage portfolio by [Your Name]"&gt;
+    &lt;title&gt;[Your Name] - Digital Collage Artist&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+</div>
+
+            <h2>Semantic HTML5 Elements</h2>
+            <p>Semantic elements clearly describe their purpose to both browsers and developers:</p>
+
+            <h4>&lt;header&gt;</h4>
+            <p>Contains introductory content, typically navigation and site branding:</p>
+            <div class="code-block">
+&lt;header&gt;
+    &lt;nav&gt;
+        &lt;h1&gt;Your Name&lt;/h1&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#gallery"&gt;Gallery&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+</div>
+
+            <h4>&lt;main&gt;</h4>
+            <p>Contains the primary content of the page:</p>
+            <div class="code-block">
+&lt;main&gt;
+    &lt;!-- All your main content sections go here --&gt;
+&lt;/main&gt;
+</div>
+
+            <h4>&lt;section&gt;</h4>
+            <p>Represents a distinct section of content:</p>
+            <div class="code-block">
+&lt;section id="about"&gt;
+    &lt;h2&gt;About My Work&lt;/h2&gt;
+    &lt;p&gt;I create digital collages that blend photography, illustration, and design...&lt;/p&gt;
+&lt;/section&gt;
+</div>
+
+            <h4>&lt;article&gt;</h4>
+            <p>Represents independent, reusable content:</p>
+            <div class="code-block">
+&lt;article class="gallery-item"&gt;
+    &lt;img src="images/collage-1.jpg" alt="Abstract collage with vibrant colors"&gt;
+    &lt;h3&gt;Urban Dreams&lt;/h3&gt;
+    &lt;p&gt;A digital exploration of city life and nature.&lt;/p&gt;
+&lt;/article&gt;
+</div>
+
+            <h4>&lt;aside&gt;</h4>
+            <p>Contains content related to the main content but not essential:</p>
+            <div class="code-block">
+&lt;aside&gt;
+    &lt;h3&gt;Artist Statement&lt;/h3&gt;
+    &lt;p&gt;My work explores the intersection of digital and analog...&lt;/p&gt;
+&lt;/aside&gt;
+</div>
+
+            <h4>&lt;footer&gt;</h4>
+            <p>Contains footer information:</p>
+            <div class="code-block">
+&lt;footer&gt;
+    &lt;p&gt;&copy; 2025 Your Name. All rights reserved.&lt;/p&gt;
+    &lt;p&gt;Contact: &lt;a href="mailto:you@example.com"&gt;you@example.com&lt;/a&gt;&lt;/p&gt;
+&lt;/footer&gt;
+</div>
+
+            <h2>Complete Portfolio HTML Structure</h2>
+            <p>Here's the complete HTML structure for your collage portfolio:</p>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="description" content="Digital collage portfolio showcasing contemporary art and design"&gt;
+    &lt;meta name="keywords" content="digital art, collage, portfolio, contemporary art"&gt;
+    &lt;meta name="author" content="Your Name"&gt;
+    
+    &lt;title&gt;Your Name - Digital Collage Artist&lt;/title&gt;
+    
+    &lt;link rel="stylesheet" href="css/reset.css"&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+    
+    &lt;!-- Open Graph meta tags for social media --&gt;
+    &lt;meta property="og:title" content="Your Name - Digital Collage Artist"&gt;
+    &lt;meta property="og:description" content="Contemporary digital collages exploring color, form, and meaning"&gt;
+    &lt;meta property="og:image" content="images/social-preview.jpg"&gt;
+    &lt;meta property="og:url" content="https://yourname.com"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;nav&gt;
+            &lt;h1&gt;&lt;a href="#home"&gt;Your Name&lt;/a&gt;&lt;/h1&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#gallery"&gt;Gallery&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#process"&gt;Process&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;section id="hero"&gt;
+            &lt;h2&gt;Digital Collage Artist&lt;/h2&gt;
+            &lt;p&gt;Creating visual narratives through contemporary digital composition&lt;/p&gt;
+            &lt;a href="#gallery" class="cta-button"&gt;View Gallery&lt;/a&gt;
+        &lt;/section&gt;
+
+        &lt;section id="about"&gt;
+            &lt;h2&gt;About My Work&lt;/h2&gt;
+            &lt;div class="about-content"&gt;
+                &lt;div class="about-text"&gt;
+                    &lt;p&gt;I create digital collages that explore the relationship between memory, technology, and visual storytelling. Each piece combines photography, illustration, and design elements to create new narratives that question our perception of reality.&lt;/p&gt;
+                    &lt;p&gt;My work has been featured in digital art exhibitions and published in contemporary art magazines. I draw inspiration from urban environments, natural forms, and the endless possibilities of digital manipulation.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="about-image"&gt;
+                    &lt;img src="images/artist-photo.jpg" alt="Portrait of the artist in their studio"&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section id="gallery"&gt;
+            &lt;h2&gt;Gallery&lt;/h2&gt;
+            &lt;div class="gallery-grid"&gt;
+                &lt;article class="gallery-item"&gt;
+                    &lt;img src="images/gallery/collage-1.jpg" 
+                         alt="Abstract digital collage featuring urban elements and organic forms"
+                         loading="lazy"&gt;
+                    &lt;div class="item-info"&gt;
+                        &lt;h3&gt;Urban Dreams&lt;/h3&gt;
+                        &lt;p&gt;Digital collage, 2025&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/article&gt;
+
+                &lt;article class="gallery-item"&gt;
+                    &lt;img src="images/gallery/collage-2.jpg" 
+                         alt="Colorful composition blending photography and geometric shapes"
+                         loading="lazy"&gt;
+                    &lt;div class="item-info"&gt;
+                        &lt;h3&gt;Fragmented Memories&lt;/h3&gt;
+                        &lt;p&gt;Digital collage, 2025&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/article&gt;
+
+                &lt;article class="gallery-item"&gt;
+                    &lt;img src="images/gallery/collage-3.jpg" 
+                         alt="Surreal landscape combining natural and artificial elements"
+                         loading="lazy"&gt;
+                    &lt;div class="item-info"&gt;
+                        &lt;h3&gt;Digital Nature&lt;/h3&gt;
+                        &lt;p&gt;Digital collage, 2025&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/article&gt;
+
+                &lt;article class="gallery-item"&gt;
+                    &lt;img src="images/gallery/collage-4.jpg" 
+                         alt="Portrait study with overlapping textures and colors"
+                         loading="lazy"&gt;
+                    &lt;div class="item-info"&gt;
+                        &lt;h3&gt;Identity Layers&lt;/h3&gt;
+                        &lt;p&gt;Digital collage, 2025&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/article&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section id="process"&gt;
+            &lt;h2&gt;Creative Process&lt;/h2&gt;
+            &lt;div class="process-steps"&gt;
+                &lt;div class="step"&gt;
+                    &lt;h3&gt;01. Concept&lt;/h3&gt;
+                    &lt;p&gt;Every piece begins with an idea or emotion I want to explore visually.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="step"&gt;
+                    &lt;h3&gt;02. Collection&lt;/h3&gt;
+                    &lt;p&gt;I gather photographs, textures, and design elements that support the concept.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="step"&gt;
+                    &lt;h3&gt;03. Composition&lt;/h3&gt;
+                    &lt;p&gt;Using digital tools, I layer and blend elements to create new visual relationships.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="step"&gt;
+                    &lt;h3&gt;04. Refinement&lt;/h3&gt;
+                    &lt;p&gt;I adjust colors, contrast, and details until the piece communicates effectively.&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section id="contact"&gt;
+            &lt;h2&gt;Get In Touch&lt;/h2&gt;
+            &lt;div class="contact-content"&gt;
+                &lt;div class="contact-info"&gt;
+                    &lt;p&gt;I'm always interested in new projects and collaborations. Whether you're looking for custom artwork or want to discuss digital art, I'd love to hear from you.&lt;/p&gt;
+                    &lt;address&gt;
+                        &lt;p&gt;Email: &lt;a href="mailto:you@example.com"&gt;you@example.com&lt;/a&gt;&lt;/p&gt;
+                        &lt;p&gt;Instagram: &lt;a href="#" target="_blank"&gt;@yourusername&lt;/a&gt;&lt;/p&gt;
+                    &lt;/address&gt;
+                &lt;/div&gt;
+                
+                &lt;form class="contact-form" name="contact" method="POST" data-netlify="true"&gt;
+                    &lt;input type="hidden" name="form-name" value="contact"&gt;
+                    
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="name"&gt;Name *&lt;/label&gt;
+                        &lt;input type="text" id="name" name="name" required&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="email"&gt;Email *&lt;/label&gt;
+                        &lt;input type="email" id="email" name="email" required&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="subject"&gt;Subject&lt;/label&gt;
+                        &lt;input type="text" id="subject" name="subject"&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="message"&gt;Message *&lt;/label&gt;
+                        &lt;textarea id="message" name="message" rows="5" required&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;button type="submit"&gt;Send Message&lt;/button&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;&copy; 2025 Your Name. All rights reserved.&lt;/p&gt;
+    &lt;/footer&gt;
+
+    &lt;script src="js/script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</div>
+
+            <h2>Important HTML Attributes</h2>
+
+            <h4>alt Attribute for Images</h4>
+            <p>Always provide descriptive alt text for accessibility:</p>
+            <div class="command">&lt;img src="collage.jpg" alt="Abstract digital collage with blue and orange geometric shapes"&gt;</div>
+
+            <h4>loading="lazy" for Performance</h4>
+            <p>Improves page load speed by loading images only when needed:</p>
+            <div class="command">&lt;img src="large-image.jpg" alt="Description" loading="lazy"&gt;</div>
+
+            <h4>target="_blank" for External Links</h4>
+            <div class="command">&lt;a href="https://instagram.com/yourusername" target="_blank"&gt;Follow on Instagram&lt;/a&gt;</div>
+
+            <h2>Forms and Input Elements</h2>
+            <p>Forms collect user input. Each input should have a label for accessibility:</p>
+            <div class="code-block">
+&lt;form&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="name"&gt;Name&lt;/label&gt;
+        &lt;input type="text" id="name" name="name" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label for="email"&gt;Email&lt;/label&gt;
+        &lt;input type="email" id="email" name="email" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label for="message"&gt;Message&lt;/label&gt;
+        &lt;textarea id="message" name="message" rows="5"&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;
+</div>
+
+            <h2>HTML Validation and Best Practices</h2>
+
+            <div class="info-box">
+                <h4>HTML Best Practices</h4>
+                <p>• Use semantic elements for better accessibility<br>
+                • Always include alt attributes on images<br>
+                • Use proper heading hierarchy (h1, h2, h3...)<br>
+                • Validate your HTML at validator.w3.org<br>
+                • Keep your HTML clean and properly indented</p>
+            </div>
+
+            <h3>Accessibility Considerations</h3>
+            <ul>
+                <li><strong>Semantic HTML:</strong> Use elements for their intended purpose</li>
+                <li><strong>Alt Text:</strong> Describe images meaningfully</li>
+                <li><strong>Form Labels:</strong> Associate labels with form controls</li>
+                <li><strong>Heading Hierarchy:</strong> Use h1-h6 in logical order</li>
+                <li><strong>Keyboard Navigation:</strong> Ensure all interactive elements are accessible</li>
+            </ul>
+
+            <h2>Creating Your Portfolio HTML</h2>
+            <p>Now it's time to create your index.html file:</p>
+            <div class="code-block">
+# Navigate to your project folder
+cd collage-portfolio
+
+# Create the HTML file with the structure above
+# You can copy the complete structure and customize:
+# - Replace "Your Name" with your actual name
+# - Update the content to reflect your work
+# - Add your own project descriptions
+# - Include your contact information
+
+# Commit your changes
+git add index.html
+git commit -m "Add complete HTML structure for portfolio"
+git push
+</div>
+
+            <h2>Next Steps</h2>
+            <p>With your HTML structure complete, you have a solid foundation for your portfolio. The semantic markup will help with SEO and accessibility, while the organized structure will make styling with CSS much easier. Next, we'll learn CSS to transform this structure into a beautiful, responsive design.</p>
+        </div>
+
+        <!-- Lesson 4: CSS -->
+        <div id="lesson4" class="page">
+            <a class="back-btn" onclick="showPage('home')">← Back to Overview</a>
+            <h1>CSS Styling</h1>
+            <p>CSS (Cascading Style Sheets) transforms your HTML structure into beautiful, responsive websites. It controls layout, colors, typography, animations, and how your site adapts to different screen sizes. Modern CSS provides powerful tools like Grid and Flexbox for creating sophisticated layouts.</p>
+
+            <h2>What is CSS?</h2>
+            <p>CSS works by selecting HTML elements and applying style rules to them. It follows a cascading system where styles can inherit from parent elements and be overridden by more specific rules. The "cascade" determines which styles take priority when conflicts arise.</p>
+
+            <h3>CSS Syntax</h3>
+            <div class="code-block">
+selector {
+    property: value;
+    another-property: another-value;
+}
+
+/* Example */
+h1 {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: 300;
+}
+</div>
+
+            <h2>CSS Selectors</h2>
+            <p>Selectors target specific HTML elements for styling:</p>
+
+            <h4>Element Selectors</h4>
+            <div class="code-block">
+/* Selects all h1 elements */
+h1 {
+    color: #ffffff;
+}
+
+/* Selects all paragraphs */
+p {
+    line-height: 1.6;
+}
+</div>
+
+            <h4>Class Selectors</h4>
+            <div class="code-block">
+/* Selects elements with class="gallery-item" */
+.gallery-item {
+    background: #222;
+    padding: 20px;
+}
+
+/* Multiple classes */
+.gallery-item.featured {
+    border: 2px solid #00d4ff;
+}
+</div>
+
+            <h4>ID Selectors</h4>
+            <div class="code-block">
+/* Selects element with id="hero" */
+#hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+</div>
+
+            <h4>Descendant Selectors</h4>
+            <div class="code-block">
+/* Selects images inside gallery items */
+.gallery-item img {
+    width: 100%;
+    height: auto;
+}
+
+/* Selects links inside navigation */
+nav a {
+    text-decoration: none;
+    color: #ccc;
+}
+</div>
+
+            <h2>CSS Reset and Base Styles</h2>
+            <p>Start with a CSS reset to ensure consistent styling across browsers. Create <strong>css/reset.css</strong>:</p>
+            <div class="code-block">
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #e5e5e5;
+    background-color: #1a1a1a;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}
+</div>
+
+            <h2>Typography</h2>
+            <p>Good typography is essential for readable, professional websites:</p>
+            <div class="code-block">
+/* Typography System */
+h1 {
+    font-size: 48px;
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    margin: 40px 0 20px 0;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 30px 0 15px 0;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 15px;
+    max-width: 65ch; /* Optimal reading width */
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+    }
+    
+    h2 {
+        font-size: 28px;
+    }
+    
+    h3 {
+        font-size: 20px;
+    }
+}
+</div>
+
+            <h2>Layout with Flexbox</h2>
+            <p>Flexbox is perfect for one-dimensional layouts like navigation bars and centering content:</p>
+
+            <div class="code-block">
+/* Navigation Layout */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: #111;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+/* Hero Section Centering */
+#hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Flexible Content Layout */
+.about-content {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-image {
+    flex: 0 0 300px;
+}
+
+/* Responsive Flexbox */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+    }
+    
+    nav {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+</div>
+
+            <h2>Layout with CSS Grid</h2>
+            <p>Grid is ideal for two-dimensional layouts like image galleries:</p>
+
+            <div class="code-block">
+/* Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 40px 0;
+}
+
+/* Responsive Grid Variations */
+@media (min-width: 1200px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Process Steps Grid */
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+</div>
+
+            <h2>Complete Portfolio Stylesheet</h2>
+            <p>Create your main <strong>css/style.css</strong> file:</p>
+            <div class="code-block">
+/* Container and Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header and Navigation */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #333;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 300;
+    color: #ffffff;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #ccc;
+    font-weight: 300;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #00d4ff;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #00d4ff;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Main Content */
+main {
+    margin-top: 80px; /* Account for fixed header */
+}
+
+/* Hero Section */
+#hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+    z-index: -1;
+}
+
+#hero h2 {
+    font-size: 64px;
+    font-weight: 100;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.5s forwards;
+}
+
+#hero p {
+    font-size: 18px;
+    color: #999;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.7s forwards;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.9s forwards;
+}
+
+.cta-button:hover {
+    background: #00d4ff;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+}
+
+/* Sections */
+section {
+    padding: 80px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* About Section */
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.about-text p {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 10px;
+    filter: grayscale(20%);
+}
+
+/* Gallery */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.gallery-item {
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.item-info {
+    padding: 20px;
+}
+
+.item-info h3 {
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.item-info p {
+    color: #999;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Process Section */
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.step {
+    text-align: center;
+    padding: 30px 20px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.step:hover {
+    border-color: #00d4ff;
+}
+
+.step h3 {
+    color: #00d4ff;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Contact Section */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 40px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-info p {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+address {
+    font-style: normal;
+    margin-top: 30px;
+}
+
+address a {
+    color: #00d4ff;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+address a:hover {
+    border-color: #00d4ff;
+}
+
+/* Form Styles */
+.contact-form {
+    background: #222;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    color: #ffffff;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #e5e5e5;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #00d4ff;
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form button {
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+    background: #00d4ff;
+    color: #1a1a1a;
+}
+
+/* Footer */
+footer {
+    background: #111;
+    border-top: 1px solid #333;
+    padding: 40px 0;
+    text-align: center;
+}
+
+footer p {
+    color: #999;
+    font-size: 14px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px 20px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+    }
+    
+    #hero h2 {
+        font-size: 36px;
+    }
+    
+    section {
+        padding: 40px 0;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .process-steps {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .contact-form {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container,
+    section {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    #hero h2 {
+        font-size: 28px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</div>
+
+            <h2>Advanced CSS Techniques</h2>
+
+            <h3>CSS Custom Properties (Variables)</h3>
+            <div class="code-block">
+:root {
+    --primary-color: #00d4ff;
+    --bg-dark: #1a1a1a;
+    --bg-medium: #222;
+    --text-light: #e5e5e5;
+    --text-muted: #999;
+    --border-color: #333;
+    --transition: 0.3s ease;
+}
+
+/* Usage */
+.gallery-item {
+    background: var(--bg-medium);
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition);
+}
+
+.gallery-item:hover {
+    border-color: var(--primary-color);
+}
+</div>
+
+            <h3>CSS Transforms and Animations</h3>
+            <div class="code-block">
+/* Hover Effects */
+.gallery-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    animation: pulse 2s infinite;
+}
+
+/* Fade In Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</div>
+
+            <h3>Media Queries for Responsive Design</h3>
+            <div class="code-block">
+/* Mobile First Approach */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Print Styles */
+@media print {
+    nav, .contact-form {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+}
+</div>
+
+            <div class="info-box">
+                <h4>CSS Performance Tips</h4>
+                <p>• Use CSS variables for consistent theming<br>
+                • Minimize the use of expensive properties like box-shadow on scroll<br>
+                • Use transform instead of changing position properties<br>
+                • Optimize images and use modern formats like WebP<br>
+                • Minimize and compress your CSS for production</p>
+            </div>
+
+            <h2>CSS Architecture</h2>
+            <p>For larger projects, organize your CSS into multiple files:</p>
+            <div class="code-block">
+css/
+├── reset.css          /* Browser reset */
+├── variables.css      /* CSS custom properties */
+├── typography.css     /* Font and text styles */
+├── layout.css         /* Grid and flexbox layouts */
+├── components.css     /* Reusable components */
+├── utilities.css      /* Helper classes */
+└── style.css         /* Main stylesheet that imports others */
+</div>
+
+            <h2>Testing Your CSS</h2>
+            <p>Always test your styles across different:</p>
+            <ul>
+                <li><strong>Browsers:</strong> Chrome, Firefox, Safari, Edge</li>
+                <li><strong>Devices:</strong> Mobile, tablet, desktop</li>
+                <li><strong>Screen sizes:</strong> Use browser dev tools</li>
+                <li><strong>Accessibility:</strong> Check color contrast and keyboard navigation</li>
+            </ul>
+
+            <h2>Next Steps</h2>
+            <p>With CSS mastered, your portfolio now has professional styling and responsive design. Next, we'll add JavaScript to create interactive features like smooth scrolling, image lightboxes, and dynamic content loading.</p>
+        </div>
+
+        <!-- Lesson 5: JavaScript -->
+        <div id="lesson5" class="page">
+            <a class="back-btn" onclick="showPage('home')">← Back to Overview</a>
+            <h1>JavaScript Interactivity</h1>
+            <p>JavaScript brings your portfolio to life with dynamic interactions, smooth animations, and responsive user experiences. It's the programming language of the web, running in every browser and enabling everything from simple hover effects to complex web applications.</p>
+
+            <h2>What is JavaScript?</h2>
+            <p>JavaScript is a programming language that manipulates the DOM (Document Object Model), handles user events, makes network requests, and creates dynamic content. Unlike HTML and CSS, JavaScript can make decisions, perform calculations, and respond to user actions in real-time.</p>
+
+            <h3>JavaScript Fundamentals</h3>
+            <div class="code-block">
+// Variables
+const siteName = "My Portfolio";
+let currentSection = "home";
+var oldWayToDeclarVariables = "avoid using var";
+
+// Functions
+function showAlert() {
+    alert("Hello, World!");
+}
+
+// Arrow functions (modern syntax)
+const greetUser = (name) => {
+    return `Welcome, ${name}!`;
+};
+
+// Objects
+const portfolio = {
+    title: "Digital Collage Portfolio",
+    artist: "Your Name",
+    pieces: 12,
+    featured: true
+};
+
+// Arrays
+const galleryImages = [
+    "collage-1.jpg",
+    "collage-2.jpg", 
+    "collage-3.jpg"
+];
+</div>
+
+            <h2>DOM Manipulation</h2>
+            <p>The DOM represents your HTML as a tree of objects that JavaScript can modify:</p>
+
+            <h4>Selecting Elements</h4>
+            <div class="code-block">
+// Select by ID
+const heroSection = document.getElementById('hero');
+
+// Select by class (returns first match)
+const firstGalleryItem = document.querySelector('.gallery-item');
+
+// Select multiple elements
+const allGalleryItems = document.querySelectorAll('.gallery-item');
+const allImages = document.getElementsByTagName('img');
+
+// Select with complex selectors
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+</div>
+
+            <h4>Modifying Elements</h4>
+            <div class="code-block">
+// Change content
+const heading = document.querySelector('h1');
+heading.textContent = "New Heading Text";
+heading.innerHTML = "Heading with <span>HTML</span>";
+
+// Change attributes
+const image = document.querySelector('.gallery-item img');
+image.src = "new-image.jpg";
+image.alt = "New description";
+
+// Change styles
+const section = document.querySelector('#about');
+section.style.backgroundColor = '#333';
+section.style.padding = '40px';
+
+// Add/remove classes
+const button = document.querySelector('.cta-button');
+button.classList.add('active');
+button.classList.remove('hidden');
+button.classList.toggle('highlighted');
+</div>
+
+            <h2>Event Handling</h2>
+            <p>Events let JavaScript respond to user interactions:</p>
+
+            <div class="code-block">
+// Click events
+const button = document.querySelector('.cta-button');
+button.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default behavior
+    console.log('Button clicked!');
+});
+
+// Multiple event types
+const input = document.querySelector('#email');
+input.addEventListener('focus', () => {
+    input.classList.add('focused');
+});
+
+input.addEventListener('blur', () => {
+    input.classList.remove('focused');
+});
+
+input.addEventListener('input', (event) => {
+    console.log('User typed:', event.target.value);
+});
+
+// Mouse events
+const galleryItem = document.querySelector('.gallery-item');
+galleryItem.addEventListener('mouseenter', () => {
+    galleryItem.style.transform = 'scale(1.05)';
+});
+
+galleryItem.addEventListener('mouseleave', () => {
+    galleryItem.style.transform = 'scale(1)';
+});
+</div>
+
+            <h2>Smooth Scrolling Navigation</h2>
+            <p>Create smooth scrolling between sections:</p>
+            <div class="code-block">
+// Smooth scrolling for navigation links
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all navigation links that start with #
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get the target section
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                // Smooth scroll to target
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active navigation state
+                updateActiveNav(this);
+            }
+        });
+    });
+});
+
+function updateActiveNav(activeLink) {
+    // Remove active class from all links
+    document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to clicked link
+    activeLink.classList.add('active');
+}
+</div>
+
+            <h2>Image Lightbox</h2>
+            <p>Create a professional image lightbox for your gallery:</p>
+            <div class="code-block">
+// Image lightbox functionality
+function createLightbox() {
+    const galleryImages = document.querySelectorAll('.gallery-item img');
+    
+    galleryImages.forEach((img, index) => {
+        img.addEventListener('click', function() {
+            openLightbox(this, index);
+        });
+    });
+}
+
+function openLightbox(clickedImage, index) {
+    // Create lightbox HTML
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = `
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <img src="${clickedImage.src}" alt="${clickedImage.alt}">
+            <div class="lightbox-info">
+                <h3>${clickedImage.closest('.gallery-item').querySelector('h3').textContent}</h3>
+                <p>${clickedImage.closest('.gallery-item').querySelector('p').textContent}</p>
+            </div>
+            <button class="lightbox-prev">&#8249;</button>
+            <button class="lightbox-next">&#8250;</button>
+        </div>
+    `;
+    
+    // Add lightbox to page
+    document.body.appendChild(lightbox);
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    
+    // Add event listeners
+    setupLightboxEvents(lightbox, index);
+    
+    // Animate in
+    requestAnimationFrame(() => {
+        lightbox.style.opacity = '1';
+    });
+}
+
+function setupLightboxEvents(lightbox, currentIndex) {
+    const allImages = document.querySelectorAll('.gallery-item img');
+    let current = currentIndex;
+    
+    // Close lightbox
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const closeLightbox = () => {
+        lightbox.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(lightbox);
+            document.body.style.overflow = 'auto';
+        }, 300);
+    };
+    
+    closeBtn.addEventListener('click', closeLightbox);
+    
+    // Close on background click
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+    
+    // Previous/Next navigation
+    const prevBtn = lightbox.querySelector('.lightbox-prev');
+    const nextBtn = lightbox.querySelector('.lightbox-next');
+    const lightboxImg = lightbox.querySelector('img');
+    const lightboxInfo = lightbox.querySelector('.lightbox-info');
+    
+    prevBtn.addEventListener('click', () => {
+        current = current > 0 ? current - 1 : allImages.length - 1;
+        updateLightboxImage(lightboxImg, lightboxInfo, allImages[current]);
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        current = current < allImages.length - 1 ? current + 1 : 0;
+        updateLightboxImage(lightboxImg, lightboxInfo, allImages[current]);
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+            nextBtn.click();
+        }
+    });
+}
+
+function updateLightboxImage(imgElement, infoElement, newImage) {
+    imgElement.src = newImage.src;
+    imgElement.alt = newImage.alt;
+    
+    const galleryItem = newImage.closest('.gallery-item');
+    infoElement.querySelector('h3').textContent = galleryItem.querySelector('h3').textContent;
+    infoElement.querySelector('p').textContent = galleryItem.querySelector('p').textContent;
+}
+
+// CSS for lightbox (add to your CSS file)
+const lightboxCSS = `
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+}
+
+.lightbox-info {
+    background: #222;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 212, 255, 0.8);
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.lightbox-prev {
+    left: -60px;
+}
+
+.lightbox-next {
+    right: -60px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: #00d4ff;
+}
+`;
+</div>
+
+            <h2>Scroll Animations</h2>
+            <p>Add animations that trigger when elements come into view:</p>
+            <div class="code-block">
+// Intersection Observer for scroll animations
+function setupScrollAnimations() {
+    const animateElements = document.querySelectorAll('.gallery-item, .step, .about-content');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target); // Stop observing once animated
+            }
+        });
+    }, {
+        threshold: 0.1, // Trigger when 10% of element is visible
+        rootMargin: '0px 0px -50px 0px' // Trigger 50px before element enters viewport
+    });
+    
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// CSS for scroll animations (add to your CSS)
+const scrollAnimationCSS = `
+.gallery-item,
+.step,
+.about-content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.gallery-item.animate-in,
+.step.animate-in,
+.about-content.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animation delays */
+.gallery-item:nth-child(1) { transition-delay: 0.1s; }
+.gallery-item:nth-child(2) { transition-delay: 0.2s; }
+.gallery-item:nth-child(3) { transition-delay: 0.3s; }
+.gallery-item:nth-child(4) { transition-delay: 0.4s; }
+`;
+</div>
+
+            <h2>Form Enhancement</h2>
+            <p>Improve form usability with JavaScript validation and feedback:</p>
+            <div class="code-block">
+// Form enhancement
+function setupContactForm() {
+    const form = document.querySelector('.contact-form');
+    const inputs = form.querySelectorAll('input, textarea');
+    
+    // Real-time validation
+    inputs.forEach(input => {
+        input.addEventListener('blur', validateField);
+        input.addEventListener('input', clearErrors);
+    });
+    
+    // Form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateForm()) {
+            submitForm(this);
+        }
+    });
+}
+
+function validateField(e) {
+    const field = e.target;
+    const value = field.value.trim();
+    const fieldName = field.name;
+    
+    // Remove existing errors
+    clearFieldError(field);
+    
+    // Validate based on field type
+    if (field.hasAttribute('required') && !value) {
+        showFieldError(field, `${fieldName} is required`);
+        return false;
+    }
+    
+    if (field.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            showFieldError(field, 'Please enter a valid email address');
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+function validateForm() {
+    const form = document.querySelector('.contact-form');
+    const inputs = form.querySelectorAll('input[required], textarea[required]');
+    let isValid = true;
+    
+    inputs.forEach(input => {
+        if (!validateField({ target: input })) {
+            isValid = false;
+        }
+    });
+    
+    return isValid;
+}
+
+function showFieldError(field, message) {
+    const formGroup = field.closest('.form-group');
+    const errorElement = document.createElement('div');
+    errorElement.className = 'field-error';
+    errorElement.textContent = message;
+    
+    formGroup.appendChild(errorElement);
+    field.classList.add('error');
+}
+
+function clearFieldError(field) {
+    const formGroup = field.closest('.form-group');
+    const existingError = formGroup.querySelector('.field-error');
+    
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    field.classList.remove('error');
+}
+
+function clearErrors(e) {
+    clearFieldError(e.target);
+}
+
+function submitForm(form) {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    // Show loading state
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // Simulate form submission (replace with actual submission)
+    setTimeout(() => {
+        showFormSuccess();
+        form.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }, 1000);
+}
+
+function showFormSuccess() {
+    const form = document.querySelector('.contact-form');
+    const successMessage = document.createElement('div');
+    successMessage.className = 'form-success';
+    successMessage.textContent = 'Thank you! Your message has been sent.';
+    
+    form.insertBefore(successMessage, form.firstChild);
+    
+    setTimeout(() => {
+        successMessage.remove();
+    }, 5000);
+}
+
+// CSS for form validation (add to your CSS)
+const formValidationCSS = `
+.field-error {
+    color: #ff4444;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.form-group input.error,
+.form-group textarea.error {
+    border-color: #ff4444;
+    box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.1);
+}
+
+.form-success {
+    background: #00d4ff;
+    color: #1a1a1a;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+`;
+</div>
+
+            <h2>Complete JavaScript File</h2>
+            <p>Create your <strong>js/script.js</strong> file with all functionality:</p>
+            <div class="code-block">
+// Portfolio JavaScript - js/script.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all functionality
+    setupSmoothScrolling();
+    setupScrollAnimations();
+    createLightbox();
+    setupContactForm();
+    setupScrollToTop();
+    
+    console.log('Portfolio initialized successfully!');
+});
+
+// Smooth scrolling navigation
+function setupSmoothScrolling() {
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const headerHeight = 80; // Account for fixed header
+                const targetPosition = targetSection.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                updateActiveNav(this);
+            }
+        });
+    });
+}
+
+// Update active navigation based on scroll position
+function updateActiveNav(activeLink) {
+    document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+}
+
+// Update navigation on scroll
+window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPosition = window.scrollY + 100;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const navLink = document.querySelector(`nav a[href="#${sectionId}"]`);
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            updateActiveNav(navLink);
+        }
+    });
+});
+
+// Scroll to top button
+function setupScrollToTop() {
+    // Create scroll to top button
+    const scrollTopBtn = document.createElement('button');
+    scrollTopBtn.innerHTML = '↑';
+    scrollTopBtn.className = 'scroll-top-btn';
+    scrollTopBtn.setAttribute('aria-label', 'Scroll to top');
+    document.body.appendChild(scrollTopBtn);
+    
+    // Show/hide based on scroll position
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 500) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+    
+    // Scroll to top on click
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Lazy loading for images
+function setupLazyLoading() {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src || img.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// Utility functions
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Performance optimization
+const debouncedScroll = debounce(function() {
+    // Expensive scroll operations go here
+}, 16); // ~60fps
+
+window.addEventListener('scroll', debouncedScroll);
+</div>
+
+            <div class="info-box">
+                <h4>JavaScript Best Practices</h4>
+                <p>• Use modern ES6+ syntax (const, let, arrow functions)<br>
+                • Add event listeners after DOM is loaded<br>
+                • Use meaningful variable and function names<br>
+                • Handle errors gracefully with try/catch<br>
+                • Optimize performance with debouncing and lazy loading</p>
+            </div>
+
+            <h2>Testing Your JavaScript</h2>
+            <p>Always test your JavaScript functionality:</p>
+            <ul>
+                <li><strong>Browser Console:</strong> Check for errors in DevTools</li>
+                <li><strong>Different Devices:</strong> Test touch interactions on mobile</li>
+                <li><strong>Accessibility:</strong> Ensure keyboard navigation works</li>
+                <li><strong>Performance:</strong> Monitor frame rates during animations</li>
+            </ul>
+
+            <h2>Next Steps</h2>
+            <p>Your portfolio now has professional interactive features that enhance user experience. Next, we'll learn how to optimize and host your images using Cloudinary, ensuring fast loading times and professional image management.</p>
+        </div>
+
+        <!-- Lesson 6: Images -->
+        <div id="lesson6" class="page">
+            <a class="back-btn" onclick="showPage('home')">← Back to Overview</a>
+            <h1>Image Optimization with Cloudinary</h1>
+            <p>Professional image management is crucial for portfolio sites. Cloudinary provides powerful image optimization, automatic format conversion, responsive delivery, and transformations that can reduce load times by 50-80% while maintaining visual quality.</p>
+
+            <h2>Why Image Optimization Matters</h2>
+            <p>Images typically account for 60-70% of a website's total size. Unoptimized images lead to slow loading times, poor user experience, and higher bandwidth costs. For a collage portfolio, proper image optimization is essential for showcasing your work professionally.</p>
+
+            <h3>Common Image Problems</h3>
+            <ul>
+                <li><strong>Large file sizes:</strong> RAW images can be 10-50MB each</li>
+                <li><strong>Wrong formats:</strong> Using PNG when JPEG would be better</li>
+                <li><strong>Fixed sizes:</strong> Loading desktop images on mobile devices</li>
+                <li><strong>No compression:</strong> Missing automatic quality optimization</li>
+                <li><strong>Poor loading:</strong> All images loading at once instead of as needed</li>
+            </ul>
+
+            <h2>Understanding Image Formats</h2>
+
+            <table>
+                <tr>
+                    <th>Format</th>
+                    <th>Best For</th>
+                    <th>Pros</th>
+                    <th>Cons</th>
+                </tr>
+                <tr>
+                    <td>JPEG</td>
+                    <td>Photos, artwork</td>
+                    <td>Small file size, universal support</td>
+                    <td>Lossy compression, no transparency</td>
+                </tr>
+                <tr>
+                    <td>PNG</td>
+                    <td>Graphics, transparency</td>
+                    <td>Lossless, supports transparency</td>
+                    <td>Larger file sizes</td>
+                </tr>
+                <tr>
+                    <td>WebP</td>
+                    <td>Modern web images</td>
+                    <td>30% smaller than JPEG, supports transparency</td>
+                    <td>Limited older browser support</td>
+                </tr>
+                <tr>
+                    <td>AVIF</td>
+                    <td>Next-gen images</td>
+                    <td>50% smaller than JPEG, excellent quality</td>
+                    <td>Very limited browser support</td>
+                </tr>
+            </table>
+
+            <h2>Setting Up Cloudinary</h2>
+
+            <h3>Creating Your Account</h3>
+            <ol>
+                <li>Go to <strong>cloudinary.com</strong> and sign up</li>
+                <li>Choose the free plan (includes 25GB storage and 25GB bandwidth)</li>
+                <li>Verify your email address</li>
+                <li>Note your Cloud Name from the dashboard</li>
+            </ol>
+
+            <h3>Understanding Cloudinary URLs</h3>
+            <p>Cloudinary URLs follow a specific structure that enables transformations:</p>
+            <div class="code-block">
+https://res.cloudinary.com/[CLOUD_NAME]/image/upload/[TRANSFORMATIONS]/[IMAGE_NAME]
+
+Example:
+https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_400,h_300,f_auto,q_auto/collage-1.jpg
+</div>
+
+            <h4>URL Components</h4>
+            <ul>
+                <li><strong>res.cloudinary.com:</strong> Cloudinary's delivery domain</li>
+                <li><strong>[CLOUD_NAME]:</strong> Your unique identifier</li>
+                <li><strong>image/upload:</strong> Specifies image delivery</li>
+                <li><strong>[TRANSFORMATIONS]:</strong> Size, format, quality parameters</li>
+                <li><strong>[IMAGE_NAME]:</strong> Your original filename</li>
+            </ul>
+
+            <h2>Essential Cloudinary Transformations</h2>
+
+            <h3>Automatic Optimization</h3>
+            <div class="code-block">
+f_auto    // Automatic format (WebP, AVIF when supported)
+q_auto    // Automatic quality optimization
+dpr_auto  // Automatic device pixel ratio adjustment
+
+// Combined for best optimization
+f_auto,q_auto,dpr_auto
+</div>
+
+            <h3>Resizing and Cropping</h3>
+            <div class="code-block">
+w_400                    // Width: 400px
+h_300                    // Height: 300px
+c_fill                   // Crop to fill exact dimensions
+c_fit                    // Fit within dimensions (maintain aspect ratio)
+c_scale                  // Scale to exact dimensions (may distort)
+c_crop                   // Crop from center
+c_thumb                  // Thumbnail mode (face detection)
+
+// Gallery thumbnail example
+c_fill,w_400,h_400,g_face  // 400x400 square, focus on faces
+</div>
+
+            <h3>Quality and Compression</h3>
+            <div class="code-block">
+q_auto:best     // Best quality (larger file)
+q_auto:good     // Good quality (balanced)
+q_auto:eco      // Economy quality (smaller file)
+q_80            // Specific quality (1-100)
+
+// For artwork portfolio
+q_auto:best,f_auto  // Best quality with modern formats
+</div>
+
+            <h2>Responsive Images with Cloudinary</h2>
+            <p>Serve different image sizes based on device and viewport:</p>
+            <div class="code-block">
+&lt;img 
+    src="https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_400,h_300,f_auto,q_auto/collage-1.jpg"
+    srcset="
+        https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_300,h_225,f_auto,q_auto/collage-1.jpg 300w,
+        https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_600,h_450,f_auto,q_auto/collage-1.jpg 600w,
+        https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_800,h_600,f_auto,q_auto/collage-1.jpg 800w,
+        https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_1200,h_900,f_auto,q_auto/collage-1.jpg 1200w"
+    sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
+    alt="Abstract digital collage featuring urban elements and organic forms"
+    loading="lazy"&gt;
+</div>
+
+            <h3>Understanding srcset and sizes</h3>
+            <ul>
+                <li><strong>srcset:</strong> List of available image sizes with their widths</li>
+                <li><strong>sizes:</strong> Instructions for which image to use at different viewport widths</li>
+                <li><strong>loading="lazy":</strong> Load images only when they're about to enter the viewport</li>
+            </ul>
+
+            <h2>Gallery Implementation</h2>
+            <p>Update your HTML gallery with optimized Cloudinary images:</p>
+            <div class="code-block">
+&lt;section id="gallery"&gt;
+    &lt;h2&gt;Gallery&lt;/h2&gt;
+    &lt;div class="gallery-grid"&gt;
+        &lt;article class="gallery-item"&gt;
+            &lt;picture&gt;
+                &lt;!-- Modern formats for supported browsers --&gt;
+                &lt;source 
+                    srcset="
+                        https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_300,h_225,f_webp,q_auto/urban-dreams.jpg 300w,
+                        https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_600,h_450,f_webp,q_auto/urban-dreams.jpg 600w,
+                        https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_800,h_600,f_webp,q_auto/urban-dreams.jpg 800w"
+                    sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
+                    type="image/webp"&gt;
+                
+                &lt;!-- Fallback JPEG --&gt;
+                &lt;img 
+                    src="https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_400,h_300,f_auto,q_auto/urban-dreams.jpg"
+                    srcset="
+                        https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_300,h_225,f_auto,q_auto/urban-dreams.jpg 300w,
+                        https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_600,h_450,f_auto,q_auto/urban-dreams.jpg 600w,
+                        https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_800,h_600,f_auto,q_auto/urban-dreams.jpg 800w"
+                    sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
+                    alt="Abstract digital collage featuring urban elements and organic forms"
+                    loading="lazy"&gt;
+            &lt;/picture&gt;
+            
+            &lt;div class="item-info"&gt;
+                &lt;h3&gt;Urban Dreams&lt;/h3&gt;
+                &lt;p&gt;Digital collage, 2025&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;!-- Repeat for other gallery items --&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+</div>
+
+            <h2>Advanced Cloudinary Features</h2>
+
+            <h3>Artistic Effects for Collages</h3>
+            <div class="code-block">
+// Artistic filters
+e_art:audrey           // Audrey filter
+e_art:athena           // Athena filter  
+e_art:hairspray        // Hairspray effect
+e_cartoonify           // Cartoon effect
+e_oil_paint            // Oil painting effect
+
+// Color adjustments
+e_saturation:50        // Increase saturation
+e_brightness:20        // Adjust brightness
+e_contrast:30          // Increase contrast
+co_rgb:ff0000,e_colorize:50  // Colorize with red tint
+
+// Example URL with artistic effect
+https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_800,h_600,e_art:athena,f_auto,q_auto/collage-1.jpg
+</div>
+
+            <h3>Background Removal and Overlays</h3>
+            <div class="code-block">
+// Remove background (AI-powered)
+e_background_removal
+
+// Add background color
+b_rgb:1a1a1a          // Dark background
+b_auto                // Automatic background color
+
+// Overlay text or watermarks
+l_text:Arial_40_bold:© Your Name,co_white,g_south_east,x_20,y_20
+
+// Example: Logo watermark
+l_your-logo,w_100,o_50,g_south_east,x_10,y_10
+</div>
+
+            <h3>Progressive JPEG and Blur Placeholders</h3>
+            <div class="code-block">
+// Progressive JPEG for faster perceived loading
+fl_progressive
+
+// Low-quality placeholder for immediate display
+q_1,e_blur:1000       // Very low quality, heavily blurred
+
+// Example implementation in JavaScript
+function loadImageProgressively(img) {
+    const originalSrc = img.dataset.src;
+    const cloudinaryBase = originalSrc.split('/upload/')[0] + '/upload/';
+    const imagePath = originalSrc.split('/upload/')[1];
+    
+    // Create blur placeholder
+    const blurSrc = cloudinaryBase + 'q_1,e_blur:1000,f_auto/' + imagePath;
+    
+    // Load blur placeholder first
+    img.src = blurSrc;
+    
+    // Then load full quality
+    const fullImg = new Image();
+    fullImg.onload = function() {
+        img.src = originalSrc;
+        img.classList.add('loaded');
+    };
+    fullImg.src = originalSrc;
+}
+</div>
+
+            <h2>Uploading Images to Cloudinary</h2>
+
+            <h3>Media Library Upload</h3>
+            <ol>
+                <li>Go to your Cloudinary dashboard</li>
+                <li>Click "Media Library" in the top navigation</li>
+                <li>Click "Upload" and select your collage images</li>
+                <li>Organize images into folders (e.g., "gallery", "thumbnails")</li>
+                <li>Copy the public URLs for use in your HTML</li>
+            </ol>
+
+            <h3>Folder Organization</h3>
+            <div class="code-block">
+// Organize with folders in URLs
+gallery/collage-1.jpg
+gallery/collage-2.jpg
+thumbnails/bio-photo.jpg
+backgrounds/hero-bg.jpg
+
+// URL structure with folders
+https://res.cloudinary.com/your-cloud-name/image/upload/f_auto,q_auto/gallery/collage-1.jpg
+</div>
+
+            <h2>Performance Monitoring</h2>
+            <p>Monitor your image performance with browser DevTools:</p>
+
+            <div class="code-block">
+// Check image sizes in DevTools Network tab
+// Look for:
+// - Total image weight < 2MB for initial page load
+// - Individual images < 500KB for gallery thumbnails
+// - WebP format being served to modern browsers
+// - Proper cache headers (Cloudinary handles this automatically)
+
+// Test loading performance
+console.time('Gallery Load');
+window.addEventListener('load', function() {
+    console.timeEnd('Gallery Load');
+});
+</div>
+
+            <h3>Image Performance Best Practices</h3>
+            <div class="info-box">
+                <h4>Optimization Checklist</h4>
+                <p>• Use f_auto,q_auto on all images<br>
+                • Implement responsive images with srcset<br>
+                • Add loading="lazy" to images below the fold<br>
+                • Use picture element for format fallbacks<br>
+                • Monitor Core Web Vitals in Google PageSpeed Insights</p>
+            </div>
+
+            <h2>SEO and Accessibility</h2>
+            <p>Proper image optimization helps with both performance and SEO:</p>
+            <div class="code-block">
+&lt;img 
+    src="optimized-image.jpg"
+    alt="Abstract digital collage combining photography and geometric shapes in blue and orange tones"
+    title="Urban Dreams - Digital Collage by Your Name"
+    loading="lazy"
+    width="400"
+    height="300"&gt;
+
+&lt;!-- Structured data for artwork --&gt;
+&lt;script type="application/ld+json"&gt;
+{
+    "@context": "http://schema.org",
+    "@type": "CreativeWork",
+    "name": "Urban Dreams",
+    "creator": {
+        "@type": "Person",
+        "name": "Your Name"
+    },
+    "image": "https://res.cloudinary.com/your-cloud-name/image/upload/f_auto,q_auto/gallery/urban-dreams.jpg",
+    "description": "A digital collage exploring the intersection of urban life and natural forms"
+}
+&lt;/script&gt;
+</div>
+
+            <h2>Complete Implementation Example</h2>
+            <p>Here's a complete example of an optimized gallery section:</p>
+            <div class="code-block">
+&lt;section id="gallery"&gt;
+    &lt;div class="container"&gt;
+        &lt;h2&gt;Gallery&lt;/h2&gt;
+        &lt;div class="gallery-grid"&gt;
+            &lt;article class="gallery-item" data-title="Urban Dreams" data-year="2025"&gt;
+                &lt;picture&gt;
+                    &lt;source 
+                        media="(max-width: 480px)"
+                        srcset="https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_300,h_300,f_webp,q_auto/gallery/urban-dreams.jpg"
+                        type="image/webp"&gt;
+                    &lt;source 
+                        media="(max-width: 768px)"
+                        srcset="https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_400,h_400,f_webp,q_auto/gallery/urban-dreams.jpg"
+                        type="image/webp"&gt;
+                    &lt;source 
+                        srcset="https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_500,h_500,f_webp,q_auto/gallery/urban-dreams.jpg"
+                        type="image/webp"&gt;
+                    
+                    &lt;img 
+                        src="https://res.cloudinary.com/your-cloud-name/image/upload/c_fill,w_400,h_400,f_auto,q_auto/gallery/urban-dreams.jpg"
+                        alt="Abstract digital collage featuring urban architecture mixed with organic flowing forms in vibrant blue and orange tones"
+                        loading="lazy"
+                        width="400"
+                        height="400"
+                        data-lightbox="https://res.cloudinary.com/your-cloud-name/image/upload/c_fit,w_1200,h_900,f_auto,q_auto:best/gallery/urban-dreams.jpg"&gt;
+                &lt;/picture&gt;
+                
+                &lt;div class="item-info"&gt;
+                    &lt;h3&gt;Urban Dreams&lt;/h3&gt;
+                    &lt;p&gt;Digital collage, 2025&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/article&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+</div>
+
+            <h2>Next Steps</h2>
+            <p>With your images professionally optimized and hosted on Cloudinary, your portfolio will load quickly and look great on any device. Next, we'll deploy your complete portfolio to Netlify, making it accessible to the world with automatic builds and global content delivery.</p>
+        </div>
+
+        <!-- Lesson 7: Hosting -->
+        <div id="lesson7" class="page">
+            <a class="back-btn" onclick="showPage('home')">← Back to Overview</a>
+            <h1>Netlify Hosting</h1>
+            <p>Netlify is a modern hosting platform that offers static site hosting, automatic deployments from Git, serverless functions, form handling, and global CDN distribution. It's perfect for portfolio sites and offers generous free tier limits for personal projects.</p>
+
+            <h2>Why Choose Netlify?</h2>
+            <p>Unlike traditional web hosting, Netlify specializes in static sites and modern web development workflows. Here's why it's ideal for your portfolio:</p>
+
+            <h3>Key Advantages</h3>
+            <ul>
+                <li><strong>Git Integration:</strong> Automatic deployments when you push code</li>
+                <li><strong>Global CDN:</strong> Fast loading worldwide</li>
+                <li><strong>HTTPS by Default:</strong> Free SSL certificates</li>
+                <li><strong>Form Handling:</strong> Process contact forms without backend code</li>
+                <li><strong>Instant Rollbacks:</strong> Revert to previous versions instantly</li>
+                <li><strong>Preview Deployments:</strong> Test changes before going live</li>
+                <li><strong>Custom Domains:</strong> Use your own domain name</li>
+            </ul>
+
+            <h3>Free Tier Limits</h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Free Limit</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>Bandwidth</td>
+                    <td>100GB/month</td>
+                    <td>More than enough for portfolio sites</td>
+                </tr>
+                <tr>
+                    <td>Build Minutes</td>
+                    <td>300 minutes/month</td>
+                    <td>Typical build takes 1-2 minutes</td>
+                </tr>
+                <tr>
+                    <td>Sites</td>
+                    <td>Unlimited</td>
+                    <td>Host multiple projects</td>
+                </tr>
+                <tr>
+                    <td>Form Submissions</td>
+                    <td>100/month</td>
+                    <td>Perfect for contact forms</td>
+                </tr>
+            </table>
+
+            <h2>Preparing Your Site for Deployment</h2>
+
+            <h3>Final Code Review</h3>
+            <p>Before deploying, ensure your portfolio is complete and polished:</p>
+            <div class="code-block">
+# Check your project structure
+collage-portfolio/
+├── index.html          # Main HTML file
+├── css/
+│   ├── reset.css      # CSS reset
+│   └── style.css      # Main styles
+├── js/
+│   └── script.js      # JavaScript functionality
+├── images/
+│   └── (local images if any)
+├── README.md          # Project documentation
+└── .gitignore         # Git ignore file
+</div>
+
+            <h3>Creating .gitignore</h3>
+            <p>Exclude unnecessary files from your repository:</p>
+            <div class="code-block">
+# Dependencies
+node_modules/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+
+# Build files (if you add build tools later)
+dist/
+build/
+</div>
+
+            <h3>Testing Locally</h3>
+            <p>Test your site locally before deployment:</p>
+            <div class="code-block">
+# Simple HTTP server with Python (if available)
+python3 -m http.server 8000
+
+# Or with Node.js (if available)
+npx http-server
+
+# Or just open index.html directly in browser
+open index.html  # macOS
+start index.html # Windows
+</div>
+
+            <h2>Deploying to Netlify</h2>
+
+            <h3>Method 1: Drag and Drop (Quick Start)</h3>
+            <ol>
+                <li>Go to <strong>netlify.com</strong> and sign up</li>
+                <li>Zip your project folder (excluding .git folder)</li>
+                <li>Drag the zip file to the Netlify deploy area</li>
+                <li>Your site will be live immediately with a random URL</li>
+            </ol>
+
+            <h3>Method 2: Git Integration (Recommended)</h3>
+            <p>This method enables automatic deployments:</p>
+
+            <h4>Step 1: Commit and Push Your Code</h4>
+            <div class="code-block">
+# Ensure all files are committed
+git add .
+git commit -m "Final portfolio ready for deployment"
+git push origin main
+</div>
+
+            <h4>Step 2: Connect to Netlify</h4>
+            <ol>
+                <li>Sign up at <strong>netlify.com</strong></li>
+                <li>Click "New site from Git"</li>
+                <li>Choose GitHub (or your Git provider)</li>
+                <li>Authorize Netlify to access your repositories</li>
+                <li>Select your "collage-portfolio" repository</li>
+                <li>Configure build settings (leave default for static sites)</li>
+                <li>Click "Deploy site"</li>
+            </ol>
+
+            <h4>Build Settings</h4>
+            <div class="code-block">
+# Basic static site settings
+Build command: (leave empty)
+Publish directory: . (current directory)
+Branch to deploy: main
+</div>
+
+            <h2>Netlify Configuration</h2>
+
+            <h3>netlify.toml Configuration File</h3>
+            <p>Create a <strong>netlify.toml</strong> file in your project root for advanced configuration:</p>
+            <div class="code-block">
+[build]
+  publish = "."
+  command = ""
+
+# Redirect rules
+[[redirects]]
+  from = "/old-page"
+  to = "/new-page"
+  status = 301
+
+# Custom headers for performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; img-src 'self' https://res.cloudinary.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+</div>
+
+            <h3>Custom 404 Page</h3>
+            <p>Create a custom 404 page for better user experience:</p>
+            <div class="code-block">
+&lt;!-- 404.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Page Not Found - Your Name&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="error-page"&gt;
+        &lt;h1&gt;404&lt;/h1&gt;
+        &lt;h2&gt;Page Not Found&lt;/h2&gt;
+        &lt;p&gt;The page you're looking for doesn't exist.&lt;/p&gt;
+        &lt;a href="/" class="cta-button"&gt;Return Home&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</div>
+
+            <h2>Form Handling with Netlify</h2>
+            <p>Netlify can process form submissions without backend code:</p>
+
+            <h3>Contact Form Setup</h3>
+            <div class="code-block">
+&lt;form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"&gt;
+    &lt;!-- Hidden field for spam protection --&gt;
+    &lt;p style="display: none;"&gt;
+        &lt;label&gt;Don't fill this out: &lt;input name="bot-field"&gt;&lt;/label&gt;
+    &lt;/p&gt;
+    
+    &lt;input type="hidden" name="form-name" value="contact"&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label for="name"&gt;Name *&lt;/label&gt;
+        &lt;input type="text" id="name" name="name" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label for="email"&gt;Email *&lt;/label&gt;
+        &lt;input type="email" id="email" name="email" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label for="subject"&gt;Subject&lt;/label&gt;
+        &lt;input type="text" id="subject" name="subject"&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label for="message"&gt;Message *&lt;/label&gt;
+        &lt;textarea id="message" name="message" rows="5" required&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit"&gt;Send Message&lt;/button&gt;
+&lt;/form&gt;
+</div>
+
+            <h3>Form Notifications</h3>
+            <p>Configure email notifications in Netlify dashboard:</p>
+            <ol>
+                <li>Go to Site Settings → Forms</li>
+                <li>Click "Add notification"</li>
+                <li>Choose "Email notification"</li>
+                <li>Enter your email address</li>
+                <li>Customize the email template</li>
+            </ol>
+
+            <h3>Custom Success Page</h3>
+            <div class="code-block">
+&lt;!-- success.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Thank You - Your Name&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+    &lt;meta http-equiv="refresh" content="5;url=/"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="success-page"&gt;
+        &lt;h1&gt;Thank You!&lt;/h1&gt;
+        &lt;p&gt;Your message has been sent successfully. I'll get back to you soon.&lt;/p&gt;
+        &lt;p&gt;You'll be redirected to the homepage in 5 seconds.&lt;/p&gt;
+        &lt;a href="/" class="cta-button"&gt;Return Home Now&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!-- Update form to redirect to success page --&gt;
+&lt;form name="contact" method="POST" action="/success.html" data-netlify="true"&gt;
+    &lt;!-- form fields --&gt;
+&lt;/form&gt;
+</div>
+
+            <h2>Performance Optimization</h2>
+
+            <h3>Asset Optimization</h3>
+            <div class="code-block">
+# Enable asset optimization in netlify.toml
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+</div>
+
+            <h3>Preload Critical Resources</h3>
+            <p>Add resource hints to your HTML head:</p>
+            <div class="code-block">
+&lt;head&gt;
+    &lt;!-- Preload critical CSS --&gt;
+    &lt;link rel="preload" href="css/style.css" as="style"&gt;
+    
+    &lt;!-- Preconnect to external domains --&gt;
+    &lt;link rel="preconnect" href="https://res.cloudinary.com"&gt;
+    
+    &lt;!-- DNS prefetch for external resources --&gt;
+    &lt;link rel="dns-prefetch" href="https://fonts.googleapis.com"&gt;
+    
+    &lt;!-- Stylesheets --&gt;
+    &lt;link rel="stylesheet" href="css/reset.css"&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+</div>
+
+            <h2>Domain Configuration</h2>
+
+            <h3>Custom Netlify Domain</h3>
+            <p>Change your site's Netlify subdomain:</p>
+            <ol>
+                <li>Go to Site Settings → Domain management</li>
+                <li>Click "Options" next to your netlify.app domain</li>
+                <li>Choose "Edit site name"</li>
+                <li>Enter your preferred name (e.g., your-name-portfolio)</li>
+                <li>Your site will be available at your-name-portfolio.netlify.app</li>
+            </ol>
+
+            <h3>Preparing for Custom Domain</h3>
+            <p>If you plan to use a custom domain later:</p>
+            <div class="code-block">
+# Add to netlify.toml
+[[redirects]]
+  from = "https://your-name-portfolio.netlify.app/*"
+  to = "https://yourname.com/:splat"
+  status = 301
+  force = true
+
+# This will redirect Netlify URL to custom domain once configured
+</div>
+
+            <h2>Monitoring and Analytics</h2>
+
+            <h3>Netlify Analytics</h3>
+            <p>Enable built-in analytics for insights:</p>
+            <ol>
+                <li>Go to Site Settings → Analytics</li>
+                <li>Enable Netlify Analytics ($9/month)</li>
+                <li>Or integrate free Google Analytics</li>
+            </ol>
+
+            <h3>Google Analytics Integration</h3>
+            <div class="code-block">
+&lt;!-- Add before closing &lt;/head&gt; tag --&gt;
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"&gt;&lt;/script&gt;
+&lt;script&gt;
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+&lt;/script&gt;
+</div>
+
+            <h3>Performance Monitoring</h3>
+            <div class="code-block">
+# Monitor Core Web Vitals
+# Check these metrics regularly:
+# - Largest Contentful Paint (LCP) < 2.5s
+# - First Input Delay (FID) < 100ms
+# - Cumulative Layout Shift (CLS) < 0.1
+
+# Tools for monitoring:
+# - Google PageSpeed Insights
+# - Google Search Console
+# - Lighthouse (built into Chrome DevTools)
+</div>
+
+            <h2>Deployment Workflow</h2>
+            <p>Your typical workflow after initial deployment:</p>
+            <div class="code-block">
+# 1. Make changes locally
+# Edit HTML, CSS, or JS files
+
+# 2. Test changes
+open index.html
+
+# 3. Commit and push
+git add .
+git commit -m "Update gallery with new collages"
+git push origin main
+
+# 4. Netlify automatically:
+# - Detects the push
+# - Builds and deploys
+# - Makes changes live
+# - Sends notification (if configured)
+
+# 5. Verify deployment
+# Check the live site
+# Monitor build logs if issues occur
+</div>
+
+            <h3>Branch Deployments</h3>
+            <p>Test changes safely with branch deployments:</p>
+            <div class="code-block">
+# Create feature branch
+git checkout -b feature/new-gallery-section
+
+# Make changes and commit
+git add .
+git commit -m "Add new gallery section"
+git push origin feature/new-gallery-section
+
+# Netlify creates preview deployment
+# Test at: deploy-preview-123--your-site.netlify.app
+
+# Merge when satisfied
+git checkout main
+git merge feature/new-gallery-section
+git push origin main
+</div>
+
+            <div class="info-box">
+                <h4>Deployment Best Practices</h4>
+                <p>• Always test locally before pushing<br>
+                • Use descriptive commit messages<br>
+                • Monitor build logs for errors<br>
+                • Set up email notifications for failed deploys<br>
+                • Keep your repository clean and organized</p>
+            </div>
+
+            <h2>Troubleshooting Common Issues</h2>
+
+            <h3>Build Failures</h3>
+            <div class="code-block">
+# Common issues and solutions:
+
+# 1. File case sensitivity
+# Problem: works locally but fails on Netlify
+# Solution: Check file name cases match exactly
+# style.CSS vs style.css
+
+# 2. Missing files
+# Problem: 404 errors for assets
+# Solution: Verify file paths and Git tracking
+git ls-files  # Check tracked files
+
+# 3. Form submissions not working
+# Problem: Forms submit but no notifications
+# Solution: Check data-netlify="true" attribute
+# Verify hidden form-name input matches form name
+</div>
+
+            <h3>Performance Issues</h3>
+            <div class="code-block">
+# Performance optimization checklist:
+# ✓ Optimize images with Cloudinary
+# ✓ Minify CSS and JavaScript
+# ✓ Enable browser caching
+# ✓ Use lazy loading for images
+# ✓ Minimize HTTP requests
+# ✓ Use modern image formats (WebP)
+</div>
+
+            <h2>Final Deployment Checklist</h2>
+            <p>Before going live, verify everything works:</p>
+            <ul>
+                <li>✅ All navigation links work correctly</li>
+                <li>✅ Images load and display properly</li>
+                <li>✅ Contact form submits successfully</li>
+                <li>✅ Site is responsive on mobile devices</li>
+                <li>✅ Loading speed is under 3 seconds</li>
+                <li>✅ All content is spelled correctly</li>
+                <li>✅ Meta tags are complete for SEO</li>
+                <li>✅ Social media preview looks good</li>
+            </ul>
+
+            <h2>Next Steps</h2>
+            <p>Your portfolio is now live on Netlify with professional hosting, automatic deployments, and global CDN delivery! In the final lesson, we'll complete your professional web presence by purchasing and connecting a custom domain name through Namecheap.</p>
+        </div>
+
+        <!-- Lesson 8: Domain -->
+        <div id="lesson8" class="page">
+            <a class="back-btn" onclick="showPage('home')">← Back to Overview</a>
+            <h1>Custom Domain with Namecheap</h1>
+            <p>A custom domain name is the final step in creating a professional online presence. Instead of a generic hosting URL, you'll have a memorable domain like yourname.com that builds credibility and makes your portfolio easy to find and share.</p>
+
+            <h2>Why a Custom Domain Matters</h2>
+            <p>Your domain name is your digital identity. It affects how potential clients, employers, and collaborators perceive your work and remember your portfolio.</p>
+
+            <h3>Professional Benefits</h3>
+            <ul>
+                <li><strong>Credibility:</strong> yourname.com looks more professional than random-site-123.netlify.app</li>
+                <li><strong>Memorability:</strong> Easy for people to remember and revisit</li>
+                <li><strong>SEO:</strong> Better search engine rankings with relevant domain names</li>
+                <li><strong>Email:</strong> Create professional email addresses like hello@yourname.com</li>
+                <li><strong>Control:</strong> You own the domain regardless of hosting provider</li>
+                <li><strong>Branding:</strong> Consistent identity across all platforms</li>
+            </ul>
+
+            <h2>Choosing Your Domain Name</h2>
+            <p>Your domain name should be simple, memorable, and represent your brand:</p>
+
+            <h3>Domain Strategy Options</h3>
+            <table>
+                <tr>
+                    <th>Strategy</th>
+                    <th>Example</th>
+                    <th>Best For</th>
+                    <th>Pros</th>
+                </tr>
+                <tr>
+                    <td>Personal Name</td>
+                    <td>johndoe.com</td>
+                    <td>Personal branding</td>
+                    <td>Clear identity, flexible content</td>
+                </tr>
+                <tr>
+                    <td>Name + Portfolio</td>
+                    <td>johndoeportfolio.com</td>
+                    <td>Portfolio sites</td>
+                    <td>Clear purpose, available names</td>
+                </tr>
+                <tr>
+                    <td>Name + Art</td>
+                    <td>johndoeart.com</td>
+                    <td>Artists</td>
+                    <td>Niche focus, memorable</td>
+                </tr>
+                <tr>
+                    <td>Studio Name</td>
+                    <td>pixelstudios.com</td>
+                    <td>Business/agency</td>
+                    <td>Scalable, brandable</td>
+                </tr>
+            </table>
+
+            <h3>Domain Name Best Practices</h3>
+            <div class="info-box">
+                <h4>Choosing Guidelines</h4>
+                <p>• Keep it short and easy to spell<br>
+                • Avoid hyphens and numbers<br>
+                • Use .com if available (most trusted)<br>
+                • Check social media availability<br>
+                • Consider future expansion</p>
+            </div>
+
+            <h2>Domain Extensions (TLDs)</h2>
+            <p>Choose the right top-level domain for your needs:</p>
+
+            <table>
+                <tr>
+                    <th>Extension</th>
+                    <th>Price Range</th>
+                    <th>Best For</th>
+                    <th>SEO Impact</th>
+                </tr>
+                <tr>
+                    <td>.com</td>
+                    <td>$10-15/year</td>
+                    <td>General use, businesses</td>
+                    <td>Best overall choice</td>
+                </tr>
+                <tr>
+                    <td>.art</td>
+                    <td>$15-30/year</td>
+                    <td>Artists, galleries</td>
+                    <td>Good for art niches</td>
+                </tr>
+                <tr>
+                    <td>.design</td>
+                    <td>$20-50/year</td>
+                    <td>Designers, agencies</td>
+                    <td>Good for design industry</td>
+                </tr>
+                <tr>
+                    <td>.portfolio</td>
+                    <td>$20-30/year</td>
+                    <td>Portfolio sites</td>
+                    <td>Clear purpose</td>
+                </tr>
+                <tr>
+                    <td>.me</td>
+                    <td>$20-30/year</td>
+                    <td>Personal brands</td>
+                    <td>Good for personal sites</td>
+                </tr>
+            </table>
+
+            <h2>Purchasing Your Domain</h2>
+
+            <h3>Why Namecheap?</h3>
+            <p>Namecheap offers competitive pricing, excellent customer service, and includes essential features:</p>
+            <ul>
+                <li><strong>WhoisGuard:</strong> Free privacy protection</li>
+                <li><strong>DNS Management:</strong> Easy domain configuration</li>
+                <li><strong>Email Forwarding:</strong> Route emails to existing accounts</li>
+                <li><strong>24/7 Support:</strong> Help when you need it</li>
+                <li><strong>No Hidden Fees:</strong> Transparent pricing</li>
+            </ul>
+
+            <h3>Domain Purchase Process</h3>
+            <ol>
+                <li><strong>Search for domains:</strong> Go to namecheap.com and search for your desired name</li>
+                <li><strong>Check availability:</strong> Try variations if your first choice is taken</li>
+                <li><strong>Select domain:</strong> Add your chosen domain to cart</li>
+                <li><strong>Configure settings:</strong>
+                    <ul>
+                        <li>Enable WhoisGuard (privacy protection)</li>
+                        <li>Set auto-renewal to prevent expiration</li>
+                        <li>Consider email hosting if needed</li>
+                    </ul>
+                </li>
+                <li><strong>Complete purchase:</strong> Create account and pay</li>
+                <li><strong>Verify email:</strong> Confirm your contact information</li>
+            </ol>
+
+            <h2>Understanding DNS</h2>
+            <p>DNS (Domain Name System) translates your domain name to your server's IP address. Think of it as the phone book of the internet.</p>
+
+            <h3>Key DNS Record Types</h3>
+            <table>
+                <tr>
+                    <th>Record Type</th>
+                    <th>Purpose</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>A Record</td>
+                    <td>Points domain to IP address</td>
+                    <td>yourname.com → 75.2.60.5</td>
+                </tr>
+                <tr>
+                    <td>CNAME</td>
+                    <td>Points subdomain to another domain</td>
+                    <td>www.yourname.com → yourname.com</td>
+                </tr>
+                <tr>
+                    <td>MX Record</td>
+                    <td>Email server routing</td>
+                    <td>yourname.com → mail.google.com</td>
+                </tr>
+                <tr>
+                    <td>TXT Record</td>
+                    <td>Text verification/settings</td>
+                    <td>Domain verification codes</td>
+                </tr>
+            </table>
+
+            <h2>Connecting Domain to Netlify</h2>
+
+            <h3>Step 1: Add Domain in Netlify</h3>
+            <ol>
+                <li>Go to your Netlify site dashboard</li>
+                <li>Click "Site settings" → "Domain management"</li>
+                <li>Click "Add custom domain"</li>
+                <li>Enter your domain (e.g., yourname.com)</li>
+                <li>Click "Verify" and then "Add domain"</li>
+                <li>Netlify will provide DNS settings</li>
+            </ol>
+
+            <h3>Step 2: Configure DNS in Namecheap</h3>
+            <p>In your Namecheap dashboard:</p>
+            <ol>
+                <li>Go to "Domain List" and click "Manage" next to your domain</li>
+                <li>Go to the "Advanced DNS" tab</li>
+                <li>Delete any existing A Records and CNAME Records</li>
+                <li>Add the following records:</li>
+            </ol>
+
+            <h4>Required DNS Records</h4>
+            <div class="code-block">
+# A Records (for apex domain)
+Type: A Record
+Host: @
+Value: 75.2.60.5
+TTL: Automatic
+
+# CNAME Record (for www subdomain)
+Type: CNAME Record
+Host: www
+Value: your-site-name.netlify.app
+TTL: Automatic
+
+# Example if your Netlify site is "john-doe-portfolio.netlify.app":
+# CNAME: www → john-doe-portfolio.netlify.app
+
+    <script>
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate corresponding nav link
+            const navLink = document.querySelector(`[onclick="showPage('${pageId}')"]`);
+            if (navLink) {
+                navLink.classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Update progress if it's a lesson
+            if (pageId.startsWith('lesson')) {
+                markLessonAsViewed(pageId);
+            }
+        }
+
+        // Progress tracking
+        let viewedLessons = JSON.parse(localStorage.getItem('viewedLessons') || '[]');
+
+        function markLessonAsViewed(lessonId) {
+            const lessonNumber = lessonId.replace('lesson', '');
+            if (!viewedLessons.includes(lessonNumber)) {
+                viewedLessons.push(lessonNumber);
+                localStorage.setItem('viewedLessons', JSON.stringify(viewedLessons));
+                updateProgress();
+            }
+        }
+
+        function updateProgress() {
+            const totalLessons = 8;
+            const progressFill = document.getElementById('progress-fill');
+            const statusItems = document.querySelectorAll('.lesson-status');
+            
+            // Update progress bar
+            const progressPercent = (viewedLessons.length / totalLessons) * 100;
+            if (progressFill) {
+                progressFill.style.width = progressPercent + '%';
+            }
+            
+            // Update lesson status
+            statusItems.forEach((item, index) => {
+                const lessonNumber = (index + 1).toString();
+                item.classList.remove('completed', 'current');
+                
+                if (viewedLessons.includes(lessonNumber)) {
+                    item.classList.add('completed');
+                } else if (index === viewedLessons.length) {
+                    item.classList.add('current');
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
