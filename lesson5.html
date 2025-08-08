@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interactivity - Web Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e5e5e5;
+            background-color: #1a1a1a;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: #111;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 300;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00d4ff;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 300;
+            color: #fff;
+            margin: 40px 0 20px 0;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #fff;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            font-size: 18px;
+            font-weight: 400;
+            color: #00d4ff;
+            margin: 25px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #ccc;
+            max-width: 800px;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #111;
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #e5e5e5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+
+        .command {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            color: #00d4ff;
+            padding: 12px 16px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: #1a2332;
+            border: 1px solid #2d4a6b;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .info-box h4 {
+            color: #00d4ff;
+            margin: 0 0 10px 0;
+        }
+
+        .info-box p {
+            color: #b8d4e8;
+            margin: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+            color: #ccc;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            color: #00d4ff;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            color: #fff;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #222;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #333;
+        }
+
+        th {
+            background: #111;
+            color: #00d4ff;
+            font-weight: 400;
+        }
+
+        td {
+            color: #ccc;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Web Support</a>
+            <ul class="nav-links">
+                <li><a href="lesson1.html">Command Line</a></li>
+                <li><a href="lesson2.html">Git</a></li>
+                <li><a href="lesson3.html">HTML</a></li>
+                <li><a href="lesson4.html">CSS</a></li>
+                <li><a href="lesson5.html" class="active">JavaScript</a></li>
+                <li><a href="lesson6.html">Images</a></li>
+                <li><a href="lesson7.html">Hosting</a></li>
+                <li><a href="lesson8.html">Domain</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a class="back-btn" href="index.html">← Back to Overview</a>
+        <h1>JavaScript Interactivity</h1>
+        <p>JavaScript brings your portfolio to life with dynamic interactions, smooth animations, and responsive user experiences. It's the programming language of the web, running in every browser and enabling everything from simple hover effects to complex web applications.</p>
+
+        <h2>What is JavaScript?</h2>
+        <p>JavaScript is a programming language that manipulates the DOM (Document Object Model), handles user events, makes network requests, and creates dynamic content. Unlike HTML and CSS, JavaScript can make decisions, perform calculations, and respond to user actions in real-time.</p>
+
+        <h3>JavaScript Fundamentals</h3>
+        <div class="code-block">
+// Variables
+const siteName = "My Portfolio";
+let currentSection = "home";
+var oldWayToDeclarVariables = "avoid using var";
+
+// Functions
+function showAlert() {
+    alert("Hello, World!");
+}
+
+// Arrow functions (modern syntax)
+const greetUser = (name) => {
+    return `Welcome, ${name}!`;
+};
+
+// Objects
+const portfolio = {
+    title: "Digital Collage Portfolio",
+    artist: "Your Name",
+    pieces: 12,
+    featured: true
+};
+
+// Arrays
+const galleryImages = [
+    "collage-1.jpg",
+    "collage-2.jpg", 
+    "collage-3.jpg"
+];
+</div>
+
+        <h2>DOM Manipulation</h2>
+        <p>The DOM represents your HTML as a tree of objects that JavaScript can modify:</p>
+
+        <h4>Selecting Elements</h4>
+        <div class="code-block">
+// Select by ID
+const heroSection = document.getElementById('hero');
+
+// Select by class (returns first match)
+const firstGalleryItem = document.querySelector('.gallery-item');
+
+// Select multiple elements
+const allGalleryItems = document.querySelectorAll('.gallery-item');
+const allImages = document.getElementsByTagName('img');
+
+// Select with complex selectors
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+</div>
+
+        <h4>Modifying Elements</h4>
+        <div class="code-block">
+// Change content
+const heading = document.querySelector('h1');
+heading.textContent = "New Heading Text";
+heading.innerHTML = "Heading with <span>HTML</span>";
+
+// Change attributes
+const image = document.querySelector('.gallery-item img');
+image.src = "new-image.jpg";
+image.alt = "New description";
+
+// Change styles
+const section = document.querySelector('#about');
+section.style.backgroundColor = '#333';
+section.style.padding = '40px';
+
+// Add/remove classes
+const button = document.querySelector('.cta-button');
+button.classList.add('active');
+button.classList.remove('hidden');
+button.classList.toggle('highlighted');
+</div>
+
+        <h2>Event Handling</h2>
+        <p>Events let JavaScript respond to user interactions:</p>
+
+        <div class="code-block">
+// Click events
+const button = document.querySelector('.cta-button');
+button.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default behavior
+    console.log('Button clicked!');
+});
+
+// Multiple event types
+const input = document.querySelector('#email');
+input.addEventListener('focus', () => {
+    input.classList.add('focused');
+});
+
+input.addEventListener('blur', () => {
+    input.classList.remove('focused');
+});
+
+input.addEventListener('input', (event) => {
+    console.log('User typed:', event.target.value);
+});
+
+// Mouse events
+const galleryItem = document.querySelector('.gallery-item');
+galleryItem.addEventListener('mouseenter', () => {
+    galleryItem.style.transform = 'scale(1.05)';
+});
+
+galleryItem.addEventListener('mouseleave', () => {
+    galleryItem.style.transform = 'scale(1)';
+});
+</div>
+
+        <h2>Smooth Scrolling Navigation</h2>
+        <p>Create smooth scrolling between sections:</p>
+        <div class="code-block">
+// Smooth scrolling for navigation links
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all navigation links that start with #
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get the target section
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                // Smooth scroll to target
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active navigation state
+                updateActiveNav(this);
+            }
+        });
+    });
+});
+
+function updateActiveNav(activeLink) {
+    // Remove active class from all links
+    document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to clicked link
+    activeLink.classList.add('active');
+}
+</div>
+
+        <h2>Image Lightbox</h2>
+        <p>Create a professional image lightbox for your gallery:</p>
+        <div class="code-block">
+// Image lightbox functionality
+function createLightbox() {
+    const galleryImages = document.querySelectorAll('.gallery-item img');
+    
+    galleryImages.forEach((img, index) => {
+        img.addEventListener('click', function() {
+            openLightbox(this, index);
+        });
+    });
+}
+
+function openLightbox(clickedImage, index) {
+    // Create lightbox HTML
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = `
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <img src="${clickedImage.src}" alt="${clickedImage.alt}">
+            <div class="lightbox-info">
+                <h3>${clickedImage.closest('.gallery-item').querySelector('h3').textContent}</h3>
+                <p>${clickedImage.closest('.gallery-item').querySelector('p').textContent}</p>
+            </div>
+            <button class="lightbox-prev">&#8249;</button>
+            <button class="lightbox-next">&#8250;</button>
+        </div>
+    `;
+    
+    // Add lightbox to page
+    document.body.appendChild(lightbox);
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    
+    // Add event listeners
+    setupLightboxEvents(lightbox, index);
+    
+    // Animate in
+    requestAnimationFrame(() => {
+        lightbox.style.opacity = '1';
+    });
+}
+
+function setupLightboxEvents(lightbox, currentIndex) {
+    const allImages = document.querySelectorAll('.gallery-item img');
+    let current = currentIndex;
+    
+    // Close lightbox
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const closeLightbox = () => {
+        lightbox.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(lightbox);
+            document.body.style.overflow = 'auto';
+        }, 300);
+    };
+    
+    closeBtn.addEventListener('click', closeLightbox);
+    
+    // Close on background click
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+    
+    // Previous/Next navigation
+    const prevBtn = lightbox.querySelector('.lightbox-prev');
+    const nextBtn = lightbox.querySelector('.lightbox-next');
+    const lightboxImg = lightbox.querySelector('img');
+    const lightboxInfo = lightbox.querySelector('.lightbox-info');
+    
+    prevBtn.addEventListener('click', () => {
+        current = current > 0 ? current - 1 : allImages.length - 1;
+        updateLightboxImage(lightboxImg, lightboxInfo, allImages[current]);
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        current = current < allImages.length - 1 ? current + 1 : 0;
+        updateLightboxImage(lightboxImg, lightboxInfo, allImages[current]);
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+            nextBtn.click();
+        }
+    });
+}
+
+function updateLightboxImage(imgElement, infoElement, newImage) {
+    imgElement.src = newImage.src;
+    imgElement.alt = newImage.alt;
+    
+    const galleryItem = newImage.closest('.gallery-item');
+    infoElement.querySelector('h3').textContent = galleryItem.querySelector('h3').textContent;
+    infoElement.querySelector('p').textContent = galleryItem.querySelector('p').textContent;
+}
+
+// CSS for lightbox (add to your CSS file)
+const lightboxCSS = `
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+}
+
+.lightbox-info {
+    background: #222;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 212, 255, 0.8);
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.lightbox-prev {
+    left: -60px;
+}
+
+.lightbox-next {
+    right: -60px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: #00d4ff;
+}
+`;
+</div>
+
+        <h2>Scroll Animations</h2>
+        <p>Add animations that trigger when elements come into view:</p>
+        <div class="code-block">
+// Intersection Observer for scroll animations
+function setupScrollAnimations() {
+    const animateElements = document.querySelectorAll('.gallery-item, .step, .about-content');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target); // Stop observing once animated
+            }
+        });
+    }, {
+        threshold: 0.1, // Trigger when 10% of element is visible
+        rootMargin: '0px 0px -50px 0px' // Trigger 50px before element enters viewport
+    });
+    
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// CSS for scroll animations (add to your CSS)
+const scrollAnimationCSS = `
+.gallery-item,
+.step,
+.about-content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.gallery-item.animate-in,
+.step.animate-in,
+.about-content.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animation delays */
+.gallery-item:nth-child(1) { transition-delay: 0.1s; }
+.gallery-item:nth-child(2) { transition-delay: 0.2s; }
+.gallery-item:nth-child(3) { transition-delay: 0.3s; }
+.gallery-item:nth-child(4) { transition-delay: 0.4s; }
+`;
+</div>
+
+        <h2>Form Enhancement</h2>
+        <p>Improve form usability with JavaScript validation and feedback:</p>
+        <div class="code-block">
+// Form enhancement
+function setupContactForm() {
+    const form = document.querySelector('.contact-form');
+    const inputs = form.querySelectorAll('input, textarea');
+    
+    // Real-time validation
+    inputs.forEach(input => {
+        input.addEventListener('blur', validateField);
+        input.addEventListener('input', clearErrors);
+    });
+    
+    // Form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateForm()) {
+            submitForm(this);
+        }
+    });
+}
+
+function validateField(e) {
+    const field = e.target;
+    const value = field.value.trim();
+    const fieldName = field.name;
+    
+    // Remove existing errors
+    clearFieldError(field);
+    
+    // Validate based on field type
+    if (field.hasAttribute('required') && !value) {
+        showFieldError(field, `${fieldName} is required`);
+        return false;
+    }
+    
+    if (field.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            showFieldError(field, 'Please enter a valid email address');
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+function validateForm() {
+    const form = document.querySelector('.contact-form');
+    const inputs = form.querySelectorAll('input[required], textarea[required]');
+    let isValid = true;
+    
+    inputs.forEach(input => {
+        if (!validateField({ target: input })) {
+            isValid = false;
+        }
+    });
+    
+    return isValid;
+}
+
+function showFieldError(field, message) {
+    const formGroup = field.closest('.form-group');
+    const errorElement = document.createElement('div');
+    errorElement.className = 'field-error';
+    errorElement.textContent = message;
+    
+    formGroup.appendChild(errorElement);
+    field.classList.add('error');
+}
+
+function clearFieldError(field) {
+    const formGroup = field.closest('.form-group');
+    const existingError = formGroup.querySelector('.field-error');
+    
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    field.classList.remove('error');
+}
+
+function clearErrors(e) {
+    clearFieldError(e.target);
+}
+
+function submitForm(form) {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    // Show loading state
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // Simulate form submission (replace with actual submission)
+    setTimeout(() => {
+        showFormSuccess();
+        form.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }, 1000);
+}
+
+function showFormSuccess() {
+    const form = document.querySelector('.contact-form');
+    const successMessage = document.createElement('div');
+    successMessage.className = 'form-success';
+    successMessage.textContent = 'Thank you! Your message has been sent.';
+    
+    form.insertBefore(successMessage, form.firstChild);
+    
+    setTimeout(() => {
+        successMessage.remove();
+    }, 5000);
+}
+
+// CSS for form validation (add to your CSS)
+const formValidationCSS = `
+.field-error {
+    color: #ff4444;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.form-group input.error,
+.form-group textarea.error {
+    border-color: #ff4444;
+    box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.1);
+}
+
+.form-success {
+    background: #00d4ff;
+    color: #1a1a1a;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+`;
+</div>
+
+        <h2>Complete JavaScript File</h2>
+        <p>Create your <strong>js/script.js</strong> file with all functionality:</p>
+        <div class="code-block">
+// Portfolio JavaScript - js/script.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all functionality
+    setupSmoothScrolling();
+    setupScrollAnimations();
+    createLightbox();
+    setupContactForm();
+    setupScrollToTop();
+    
+    console.log('Portfolio initialized successfully!');
+});
+
+// Smooth scrolling navigation
+function setupSmoothScrolling() {
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const headerHeight = 80; // Account for fixed header
+                const targetPosition = targetSection.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                updateActiveNav(this);
+            }
+        });
+    });
+}
+
+// Update active navigation based on scroll position
+function updateActiveNav(activeLink) {
+    document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+}
+
+// Update navigation on scroll
+window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPosition = window.scrollY + 100;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const navLink = document.querySelector(`nav a[href="#${sectionId}"]`);
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            updateActiveNav(navLink);
+        }
+    });
+});
+
+// Scroll to top button
+function setupScrollToTop() {
+    // Create scroll to top button
+    const scrollTopBtn = document.createElement('button');
+    scrollTopBtn.innerHTML = '↑';
+    scrollTopBtn.className = 'scroll-top-btn';
+    scrollTopBtn.setAttribute('aria-label', 'Scroll to top');
+    document.body.appendChild(scrollTopBtn);
+    
+    // Show/hide based on scroll position
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 500) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+    
+    // Scroll to top on click
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Lazy loading for images
+function setupLazyLoading() {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src || img.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// Utility functions
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Performance optimization
+const debouncedScroll = debounce(function() {
+    // Expensive scroll operations go here
+}, 16); // ~60fps
+
+window.addEventListener('scroll', debouncedScroll);
+</div>
+
+        <div class="info-box">
+            <h4>JavaScript Best Practices</h4>
+            <p>• Use modern ES6+ syntax (const, let, arrow functions)<br>
+            • Add event listeners after DOM is loaded<br>
+            • Use meaningful variable and function names<br>
+            • Handle errors gracefully with try/catch<br>
+            • Optimize performance with debouncing and lazy loading</p>
+        </div>
+
+        <h2>Testing Your JavaScript</h2>
+        <p>Always test your JavaScript functionality:</p>
+        <ul>
+            <li><strong>Browser Console:</strong> Check for errors in DevTools</li>
+            <li><strong>Different Devices:</strong> Test touch interactions on mobile</li>
+            <li><strong>Accessibility:</strong> Ensure keyboard navigation works</li>
+            <li><strong>Performance:</strong> Monitor frame rates during animations</li>
+        </ul>
+
+        <h2>Next Steps</h2>
+        <p>Your portfolio now has professional interactive features that enhance user experience. Next, we'll learn how to optimize and host your images using Cloudinary, ensuring fast loading times and professional image management.</p>
+    </div>
+</body>
+</html>

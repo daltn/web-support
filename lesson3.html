@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Structure - Web Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e5e5e5;
+            background-color: #1a1a1a;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: #111;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 300;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00d4ff;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 300;
+            color: #fff;
+            margin: 40px 0 20px 0;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #fff;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            font-size: 18px;
+            font-weight: 400;
+            color: #00d4ff;
+            margin: 25px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #ccc;
+            max-width: 800px;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #111;
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #e5e5e5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+
+        .command {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            color: #00d4ff;
+            padding: 12px 16px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: #1a2332;
+            border: 1px solid #2d4a6b;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .info-box h4 {
+            color: #00d4ff;
+            margin: 0 0 10px 0;
+        }
+
+        .info-box p {
+            color: #b8d4e8;
+            margin: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+            color: #ccc;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            color: #00d4ff;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            color: #fff;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #222;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #333;
+        }
+
+        th {
+            background: #111;
+            color: #00d4ff;
+            font-weight: 400;
+        }
+
+        td {
+            color: #ccc;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Web Support</a>
+            <ul class="nav-links">
+                <li><a href="lesson1.html">Command Line</a></li>
+                <li><a href="lesson2.html">Git</a></li>
+                <li><a href="lesson3.html" class="active">HTML</a></li>
+                <li><a href="lesson4.html">CSS</a></li>
+                <li><a href="lesson5.html">JavaScript</a></li>
+                <li><a href="lesson6.html">Images</a></li>
+                <li><a href="lesson7.html">Hosting</a></li>
+                <li><a href="lesson8.html">Domain</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a class="back-btn" href="index.html">← Back to Overview</a>
+        <h1>HTML Structure</h1>
+        <p>HTML (HyperText Markup Language) is the foundation of all web pages. It provides structure and meaning to content, telling browsers how to organize and display information. Modern HTML5 emphasizes semantic markup that's accessible to all users and search engine friendly.</p>
+
+        <h2>What is HTML?</h2>
+        <p>HTML uses elements (tags) to mark up content. Each element has a specific purpose and meaning, from headings and paragraphs to navigation and articles. Think of HTML as the skeleton of your webpage—it provides structure that CSS will style and JavaScript will make interactive.</p>
+
+        <h3>HTML Document Structure</h3>
+        <p>Every HTML document follows the same basic structure:</p>
+        <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Your content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</div>
+
+        <h2>Essential HTML Elements</h2>
+
+        <h3>Document Declaration</h3>
+        <div class="command">&lt;!DOCTYPE html&gt;</div>
+        <p>Tells the browser this is an HTML5 document.</p>
+
+        <h3>Root Element</h3>
+        <div class="command">&lt;html lang="en"&gt;</div>
+        <p>Contains all content. The lang attribute helps screen readers and translation tools.</p>
+
+        <h3>Head Section</h3>
+        <p>Contains metadata about the document:</p>
+        <div class="code-block">
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="description" content="Digital collage portfolio by [Your Name]"&gt;
+    &lt;title&gt;[Your Name] - Digital Collage Artist&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+</div>
+
+        <h2>Semantic HTML5 Elements</h2>
+        <p>Semantic elements clearly describe their purpose to both browsers and developers:</p>
+
+        <h4>&lt;header&gt;</h4>
+        <p>Contains introductory content, typically navigation and site branding:</p>
+        <div class="code-block">
+&lt;header&gt;
+    &lt;nav&gt;
+        &lt;h1&gt;Your Name&lt;/h1&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#gallery"&gt;Gallery&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+</div>
+
+        <h4>&lt;main&gt;</h4>
+        <p>Contains the primary content of the page:</p>
+        <div class="code-block">
+&lt;main&gt;
+    &lt;!-- All your main content sections go here --&gt;
+&lt;/main&gt;
+</div>
+
+        <h4>&lt;section&gt;</h4>
+        <p>Represents a distinct section of content:</p>
+        <div class="code-block">
+&lt;section id="about"&gt;
+    &lt;h2&gt;About My Work&lt;/h2&gt;
+    &lt;p&gt;I create digital collages that blend photography, illustration, and design...&lt;/p&gt;
+&lt;/section&gt;
+</div>
+
+        <h4>&lt;article&gt;</h4>
+        <p>Represents independent, reusable content:</p>
+        <div class="code-block">
+&lt;article class="gallery-item"&gt;
+    &lt;img src="images/collage-1.jpg" alt="Abstract collage with vibrant colors"&gt;
+    &lt;h3&gt;Urban Dreams&lt;/h3&gt;
+    &lt;p&gt;A digital exploration of city life and nature.&lt;/p&gt;
+&lt;/article&gt;
+</div>
+
+        <h4>&lt;aside&gt;</h4>
+        <p>Contains content related to the main content but not essential:</p>
+        <div class="code-block">
+&lt;aside&gt;
+    &lt;h3&gt;Artist Statement&lt;/h3&gt;
+    &lt;p&gt;My work explores the intersection of digital and analog...&lt;/p&gt;
+&lt;/aside&gt;
+</div>
+
+        <h4>&lt;footer&gt;</h4>
+        <p>Contains footer information:</p>
+        <div class="code-block">
+&lt;footer&gt;
+    &lt;p&gt;&copy; 2025 Your Name. All rights reserved.&lt;/p&gt;
+    &lt;p&gt;Contact: &lt;a href="mailto:you@example.com"&gt;you@example.com&lt;/a&gt;&lt;/p&gt;
+&lt;/footer&gt;
+</div>
+
+        <h2>Complete Portfolio HTML Structure</h2>
+        <p>Here's the complete HTML structure for your collage portfolio:</p>
+        <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="description" content="Digital collage portfolio showcasing contemporary art and design"&gt;
+    &lt;meta name="keywords" content="digital art, collage, portfolio, contemporary art"&gt;
+    &lt;meta name="author" content="Your Name"&gt;
+    
+    &lt;title&gt;Your Name - Digital Collage Artist&lt;/title&gt;
+    
+    &lt;link rel="stylesheet" href="css/reset.css"&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+    
+    &lt;!-- Open Graph meta tags for social media --&gt;
+    &lt;meta property="og:title" content="Your Name - Digital Collage Artist"&gt;
+    &lt;meta property="og:description" content="Contemporary digital collages exploring color, form, and meaning"&gt;
+    &lt;meta property="og:image" content="images/social-preview.jpg"&gt;
+    &lt;meta property="og:url" content="https://yourname.com"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;nav&gt;
+            &lt;h1&gt;&lt;a href="#home"&gt;Your Name&lt;/a&gt;&lt;/h1&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#gallery"&gt;Gallery&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#process"&gt;Process&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;section id="hero"&gt;
+            &lt;h2&gt;Digital Collage Artist&lt;/h2&gt;
+            &lt;p&gt;Creating visual narratives through contemporary digital composition&lt;/p&gt;
+            &lt;a href="#gallery" class="cta-button"&gt;View Gallery&lt;/a&gt;
+        &lt;/section&gt;
+
+        &lt;section id="about"&gt;
+            &lt;h2&gt;About My Work&lt;/h2&gt;
+            &lt;div class="about-content"&gt;
+                &lt;div class="about-text"&gt;
+                    &lt;p&gt;I create digital collages that explore the relationship between memory, technology, and visual storytelling. Each piece combines photography, illustration, and design elements to create new narratives that question our perception of reality.&lt;/p&gt;
+                    &lt;p&gt;My work has been featured in digital art exhibitions and published in contemporary art magazines. I draw inspiration from urban environments, natural forms, and the endless possibilities of digital manipulation.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="about-image"&gt;
+                    &lt;img src="images/artist-photo.jpg" alt="Portrait of the artist in their studio"&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section id="gallery"&gt;
+            &lt;h2&gt;Gallery&lt;/h2&gt;
+            &lt;div class="gallery-grid"&gt;
+                &lt;article class="gallery-item"&gt;
+                    &lt;img src="images/gallery/collage-1.jpg" 
+                         alt="Abstract digital collage featuring urban elements and organic forms"
+                         loading="lazy"&gt;
+                    &lt;div class="item-info"&gt;
+                        &lt;h3&gt;Urban Dreams&lt;/h3&gt;
+                        &lt;p&gt;Digital collage, 2025&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/article&gt;
+
+                &lt;article class="gallery-item"&gt;
+                    &lt;img src="images/gallery/collage-2.jpg" 
+                         alt="Colorful composition blending photography and geometric shapes"
+                         loading="lazy"&gt;
+                    &lt;div class="item-info"&gt;
+                        &lt;h3&gt;Fragmented Memories&lt;/h3&gt;
+                        &lt;p&gt;Digital collage, 2025&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/article&gt;
+
+                &lt;article class="gallery-item"&gt;
+                    &lt;img src="images/gallery/collage-3.jpg" 
+                         alt="Surreal landscape combining natural and artificial elements"
+                         loading="lazy"&gt;
+                    &lt;div class="item-info"&gt;
+                        &lt;h3&gt;Digital Nature&lt;/h3&gt;
+                        &lt;p&gt;Digital collage, 2025&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/article&gt;
+
+                &lt;article class="gallery-item"&gt;
+                    &lt;img src="images/gallery/collage-4.jpg" 
+                         alt="Portrait study with overlapping textures and colors"
+                         loading="lazy"&gt;
+                    &lt;div class="item-info"&gt;
+                        &lt;h3&gt;Identity Layers&lt;/h3&gt;
+                        &lt;p&gt;Digital collage, 2025&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/article&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section id="process"&gt;
+            &lt;h2&gt;Creative Process&lt;/h2&gt;
+            &lt;div class="process-steps"&gt;
+                &lt;div class="step"&gt;
+                    &lt;h3&gt;01. Concept&lt;/h3&gt;
+                    &lt;p&gt;Every piece begins with an idea or emotion I want to explore visually.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="step"&gt;
+                    &lt;h3&gt;02. Collection&lt;/h3&gt;
+                    &lt;p&gt;I gather photographs, textures, and design elements that support the concept.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="step"&gt;
+                    &lt;h3&gt;03. Composition&lt;/h3&gt;
+                    &lt;p&gt;Using digital tools, I layer and blend elements to create new visual relationships.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="step"&gt;
+                    &lt;h3&gt;04. Refinement&lt;/h3&gt;
+                    &lt;p&gt;I adjust colors, contrast, and details until the piece communicates effectively.&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section id="contact"&gt;
+            &lt;h2&gt;Get In Touch&lt;/h2&gt;
+            &lt;div class="contact-content"&gt;
+                &lt;div class="contact-info"&gt;
+                    &lt;p&gt;I'm always interested in new projects and collaborations. Whether you're looking for custom artwork or want to discuss digital art, I'd love to hear from you.&lt;/p&gt;
+                    &lt;address&gt;
+                        &lt;p&gt;Email: &lt;a href="mailto:you@example.com"&gt;you@example.com&lt;/a&gt;&lt;/p&gt;
+                        &lt;p&gt;Instagram: &lt;a href="#" target="_blank"&gt;@yourusername&lt;/a&gt;&lt;/p&gt;
+                    &lt;/address&gt;
+                &lt;/div&gt;
+                
+                &lt;form class="contact-form" name="contact" method="POST" data-netlify="true"&gt;
+                    &lt;input type="hidden" name="form-name" value="contact"&gt;
+                    
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="name"&gt;Name *&lt;/label&gt;
+                        &lt;input type="text" id="name" name="name" required&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="email"&gt;Email *&lt;/label&gt;
+                        &lt;input type="email" id="email" name="email" required&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="subject"&gt;Subject&lt;/label&gt;
+                        &lt;input type="text" id="subject" name="subject"&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="message"&gt;Message *&lt;/label&gt;
+                        &lt;textarea id="message" name="message" rows="5" required&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;button type="submit"&gt;Send Message&lt;/button&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;&copy; 2025 Your Name. All rights reserved.&lt;/p&gt;
+    &lt;/footer&gt;
+
+    &lt;script src="js/script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</div>
+
+        <h2>Important HTML Attributes</h2>
+
+        <h4>alt Attribute for Images</h4>
+        <p>Always provide descriptive alt text for accessibility:</p>
+        <div class="command">&lt;img src="collage.jpg" alt="Abstract digital collage with blue and orange geometric shapes"&gt;</div>
+
+        <h4>loading="lazy" for Performance</h4>
+        <p>Improves page load speed by loading images only when needed:</p>
+        <div class="command">&lt;img src="large-image.jpg" alt="Description" loading="lazy"&gt;</div>
+
+        <h4>target="_blank" for External Links</h4>
+        <div class="command">&lt;a href="https://instagram.com/yourusername" target="_blank"&gt;Follow on Instagram&lt;/a&gt;</div>
+
+        <h2>Forms and Input Elements</h2>
+        <p>Forms collect user input. Each input should have a label for accessibility:</p>
+        <div class="code-block">
+&lt;form&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="name"&gt;Name&lt;/label&gt;
+        &lt;input type="text" id="name" name="name" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label for="email"&gt;Email&lt;/label&gt;
+        &lt;input type="email" id="email" name="email" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label for="message"&gt;Message&lt;/label&gt;
+        &lt;textarea id="message" name="message" rows="5"&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;
+</div>
+
+        <h2>HTML Validation and Best Practices</h2>
+
+        <div class="info-box">
+            <h4>HTML Best Practices</h4>
+            <p>• Use semantic elements for better accessibility<br>
+            • Always include alt attributes on images<br>
+            • Use proper heading hierarchy (h1, h2, h3...)<br>
+            • Validate your HTML at validator.w3.org<br>
+            • Keep your HTML clean and properly indented</p>
+        </div>
+
+        <h3>Accessibility Considerations</h3>
+        <ul>
+            <li><strong>Semantic HTML:</strong> Use elements for their intended purpose</li>
+            <li><strong>Alt Text:</strong> Describe images meaningfully</li>
+            <li><strong>Form Labels:</strong> Associate labels with form controls</li>
+            <li><strong>Heading Hierarchy:</strong> Use h1-h6 in logical order</li>
+            <li><strong>Keyboard Navigation:</strong> Ensure all interactive elements are accessible</li>
+        </ul>
+
+        <h2>Creating Your Portfolio HTML</h2>
+        <p>Now it's time to create your index.html file:</p>
+        <div class="code-block">
+# Navigate to your project folder
+cd collage-portfolio
+
+# Create the HTML file with the structure above
+# You can copy the complete structure and customize:
+# - Replace "Your Name" with your actual name
+# - Update the content to reflect your work
+# - Add your own project descriptions
+# - Include your contact information
+
+# Commit your changes
+git add index.html
+git commit -m "Add complete HTML structure for portfolio"
+git push
+</div>
+
+        <h2>Next Steps</h2>
+        <p>With your HTML structure complete, you have a solid foundation for your portfolio. The semantic markup will help with SEO and accessibility, while the organized structure will make styling with CSS much easier. Next, we'll learn CSS to transform this structure into a beautiful, responsive design.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub - Web Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e5e5e5;
+            background-color: #1a1a1a;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: #111;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 300;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00d4ff;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 300;
+            color: #fff;
+            margin: 40px 0 20px 0;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #fff;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            font-size: 18px;
+            font-weight: 400;
+            color: #00d4ff;
+            margin: 25px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #ccc;
+            max-width: 800px;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #111;
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #e5e5e5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+
+        .command {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            color: #00d4ff;
+            padding: 12px 16px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: #1a2332;
+            border: 1px solid #2d4a6b;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .info-box h4 {
+            color: #00d4ff;
+            margin: 0 0 10px 0;
+        }
+
+        .info-box p {
+            color: #b8d4e8;
+            margin: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+            color: #ccc;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            color: #00d4ff;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            color: #fff;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #222;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #333;
+        }
+
+        th {
+            background: #111;
+            color: #00d4ff;
+            font-weight: 400;
+        }
+
+        td {
+            color: #ccc;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Web Support</a>
+            <ul class="nav-links">
+                <li><a href="lesson1.html">Command Line</a></li>
+                <li><a href="lesson2.html" class="active">Git</a></li>
+                <li><a href="lesson3.html">HTML</a></li>
+                <li><a href="lesson4.html">CSS</a></li>
+                <li><a href="lesson5.html">JavaScript</a></li>
+                <li><a href="lesson6.html">Images</a></li>
+                <li><a href="lesson7.html">Hosting</a></li>
+                <li><a href="lesson8.html">Domain</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a class="back-btn" href="index.html">← Back to Overview</a>
+        <h1>Git & GitHub</h1>
+        <p>Git is a distributed version control system that tracks changes in your files and enables collaboration with other developers. GitHub is a cloud-based platform that hosts Git repositories and provides additional collaboration features.</p>
+
+        <h2>What is Version Control?</h2>
+        <p>Version control is like having an unlimited undo button for your entire project. It tracks every change you make, allows you to revert to previous versions, and enables multiple people to work on the same project without conflicts.</p>
+
+        <h3>Why Git is Essential</h3>
+        <ul>
+            <li><strong>Track Changes:</strong> See exactly what changed, when, and who changed it</li>
+            <li><strong>Backup:</strong> Your code is safely stored and retrievable</li>
+            <li><strong>Branching:</strong> Work on features without breaking the main code</li>
+            <li><strong>Collaboration:</strong> Multiple developers can work simultaneously</li>
+            <li><strong>Deployment:</strong> Many hosting services integrate directly with Git</li>
+        </ul>
+
+        <h2>Git Fundamentals</h2>
+
+        <h3>Repository (Repo)</h3>
+        <p>A repository is a project folder that Git is tracking. It contains all your files plus a hidden .git folder that stores the version history.</p>
+
+        <h3>Working Directory, Staging Area, and Repository</h3>
+        <p>Git has three main areas:</p>
+        <ul>
+            <li><strong>Working Directory:</strong> Your actual files that you edit</li>
+            <li><strong>Staging Area:</strong> Files prepared for the next commit</li>
+            <li><strong>Repository:</strong> Committed snapshots of your project</li>
+        </ul>
+
+        <h2>Installing Git</h2>
+        <p>Download Git from <strong>git-scm.com</strong> and follow the installation instructions for your operating system.</p>
+
+        <h3>First-Time Setup</h3>
+        <p>Configure Git with your name and email:</p>
+        <div class="code-block">
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+# Check your configuration
+git config --list
+</div>
+
+        <h2>Basic Git Commands</h2>
+
+        <h4>git init - Initialize Repository</h4>
+        <p>Turn any folder into a Git repository:</p>
+        <div class="code-block">
+cd collage-portfolio
+git init
+</div>
+
+        <h4>git status - Check Repository Status</h4>
+        <p>See which files have changed and what's staged:</p>
+        <div class="command">git status</div>
+        <div class="code-block">
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        css/
+        index.html
+        js/
+
+nothing added to commit but untracked files present
+</div>
+
+        <h4>git add - Stage Files</h4>
+        <p>Add files to the staging area:</p>
+        <div class="command">git add index.html</div>
+        <div class="command">git add css/style.css</div>
+        <div class="command">git add .</div>
+        <p>The dot (.) adds all changed files in the current directory.</p>
+
+        <h4>git commit - Save Changes</h4>
+        <p>Create a snapshot of your staged changes:</p>
+        <div class="command">git commit -m "Initial project setup with basic file structure"</div>
+
+        <div class="info-box">
+            <h4>Writing Good Commit Messages</h4>
+            <p>Use clear, descriptive messages in present tense:<br>
+            ✅ "Add responsive navigation menu"<br>
+            ✅ "Fix image loading bug in gallery"<br>
+            ❌ "Updated stuff"<br>
+            ❌ "Fixed things"</p>
+        </div>
+
+        <h4>git log - View Commit History</h4>
+        <div class="command">git log</div>
+        <div class="command">git log --oneline</div>
+        <div class="code-block">
+commit 2f8d1a3b... (HEAD -> main)
+Author: Your Name <your.email@example.com>
+Date:   Thu Oct 15 10:30:00 2025 -0700
+
+    Initial project setup with basic file structure
+</div>
+
+        <h2>GitHub Integration</h2>
+
+        <h3>What is GitHub?</h3>
+        <p>GitHub is a cloud platform that hosts Git repositories and adds collaboration features like issue tracking, pull requests, and project management tools.</p>
+
+        <h3>Creating a GitHub Account</h3>
+        <ol>
+            <li>Go to <strong>github.com</strong> and sign up</li>
+            <li>Choose a username that represents you professionally</li>
+            <li>Verify your email address</li>
+        </ol>
+
+        <h3>Creating a Repository on GitHub</h3>
+        <ol>
+            <li>Click the "+" icon in the top right</li>
+            <li>Select "New repository"</li>
+            <li>Name it "collage-portfolio"</li>
+            <li>Make it public (so it can be hosted for free)</li>
+            <li>Don't initialize with README (we already have files)</li>
+            <li>Click "Create repository"</li>
+        </ol>
+
+        <h3>Connecting Local Repository to GitHub</h3>
+        <div class="code-block">
+# Add GitHub as remote origin
+git remote add origin https://github.com/yourusername/collage-portfolio.git
+
+# Verify the remote was added
+git remote -v
+
+# Push your code to GitHub
+git branch -M main
+git push -u origin main
+</div>
+
+        <h2>Daily Git Workflow</h2>
+
+        <h3>Making Changes</h3>
+        <div class="code-block">
+# Check what's changed
+git status
+
+# Add specific files
+git add index.html css/style.css
+
+# Or add all changes
+git add .
+
+# Commit with a descriptive message
+git commit -m "Add hero section with background image"
+
+# Push to GitHub
+git push
+</div>
+
+        <h3>Pulling Changes</h3>
+        <p>If you're working from multiple computers or collaborating:</p>
+        <div class="command">git pull</div>
+
+        <h2>Branching</h2>
+        <p>Branches allow you to work on features without affecting the main code:</p>
+
+        <div class="code-block">
+# Create and switch to new branch
+git checkout -b feature/gallery-lightbox
+
+# Work on your feature, make commits
+git add .
+git commit -m "Add lightbox functionality to gallery"
+
+# Switch back to main branch
+git checkout main
+
+# Merge your feature
+git merge feature/gallery-lightbox
+
+# Delete the feature branch
+git branch -d feature/gallery-lightbox
+</div>
+
+        <h2>Useful Git Commands</h2>
+
+        <table>
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>git diff</td>
+                <td>Show changes in working directory</td>
+            </tr>
+            <tr>
+                <td>git diff --staged</td>
+                <td>Show changes in staging area</td>
+            </tr>
+            <tr>
+                <td>git reset HEAD file.txt</td>
+                <td>Unstage a file</td>
+            </tr>
+            <tr>
+                <td>git checkout -- file.txt</td>
+                <td>Discard changes in working directory</td>
+            </tr>
+            <tr>
+                <td>git branch</td>
+                <td>List all branches</td>
+            </tr>
+            <tr>
+                <td>git clone URL</td>
+                <td>Download a repository from GitHub</td>
+            </tr>
+        </table>
+
+        <h2>GitHub Features</h2>
+
+        <h3>Issues</h3>
+        <p>Track bugs, feature requests, and tasks:</p>
+        <ul>
+            <li>Create issues for each feature or bug</li>
+            <li>Assign them to team members</li>
+            <li>Reference issues in commit messages: "Fix navigation bug (#12)"</li>
+        </ul>
+
+        <h3>README.md</h3>
+        <p>Create a README.md file to document your project:</p>
+        <div class="code-block">
+# Collage Portfolio
+
+A responsive web portfolio showcasing digital collage artwork.
+
+## Features
+
+- Responsive gallery layout
+- Image optimization with Cloudinary
+- Smooth animations and interactions
+- Contact form integration
+
+## Technologies Used
+
+- HTML5 & CSS3
+- JavaScript
+- Cloudinary for image hosting
+- Netlify for deployment
+
+## View Live
+
+[Visit the portfolio](https://yourname.netlify.app)
+</div>
+
+        <h3>GitHub Pages</h3>
+        <p>GitHub can host simple websites for free:</p>
+        <ol>
+            <li>Go to your repository settings</li>
+            <li>Scroll to "Pages" section</li>
+            <li>Select "Deploy from a branch"</li>
+            <li>Choose "main" branch</li>
+            <li>Your site will be available at username.github.io/repository-name</li>
+        </ol>
+
+        <div class="info-box">
+            <h4>Git Best Practices</h4>
+            <p>• Commit often with small, logical changes<br>
+            • Write clear commit messages<br>
+            • Pull before pushing to avoid conflicts<br>
+            • Use branches for new features<br>
+            • Never commit sensitive information (passwords, API keys)</p>
+        </div>
+
+        <h2>Common Git Scenarios</h2>
+
+        <h3>Undoing the Last Commit</h3>
+        <div class="command">git reset --soft HEAD~1</div>
+        <p>This undoes the commit but keeps your changes staged.</p>
+
+        <h3>Fixing a Commit Message</h3>
+        <div class="command">git commit --amend -m "Corrected commit message"</div>
+
+        <h3>Seeing What Changed</h3>
+        <div class="command">git show</div>
+        <p>Shows the last commit's changes.</p>
+
+        <h2>Project Exercise</h2>
+        <p>Practice the complete workflow:</p>
+        <div class="code-block">
+# 1. Initialize your portfolio repository
+cd collage-portfolio
+git init
+git add .
+git commit -m "Initial commit: Project structure and empty files"
+
+# 2. Create GitHub repository and connect
+git remote add origin https://github.com/yourusername/collage-portfolio.git
+git push -u origin main
+
+# 3. Make a change and commit
+echo "<h1>My Collage Portfolio</h1>" > index.html
+git add index.html
+git commit -m "Add basic HTML structure to homepage"
+git push
+
+# 4. Create a feature branch
+git checkout -b feature/basic-styling
+# Add some CSS, then:
+git add css/style.css
+git commit -m "Add basic typography and layout styles"
+git checkout main
+git merge feature/basic-styling
+git push
+</div>
+
+        <h2>Next Steps</h2>
+        <p>Now that you understand version control with Git and GitHub, you're ready to start building your HTML structure. Git will track every change you make, giving you the confidence to experiment and iterate on your design.</p>
+    </div>
+</body>
+</html>
